@@ -1,0 +1,436 @@
+{
+  "consentText": "Hello,\nMy name is Muhammed Naseef MS, MA Journalism and Mass Communication Student at MAMO College.\nThis survey is conducted as part of an academic research study in Journalism and Mass Communication. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and will be used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+  "description": "Academic Research Survey in Journalism and Mass Communication",
+  "sections": [
+    {
+      "description": "Demographic profile of the participant",
+      "id": "section_a",
+      "questions": [
+        {
+          "id": "q1",
+          "type": "radio",
+          "text": "What is your age?",
+          "options": [
+            "18–21",
+            "22–25",
+            "26–30",
+            "31–40",
+            "41+"
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "radio",
+          "text": "What is your gender?",
+          "options": [
+            "Male",
+            "Female",
+            "Prefer not to say",
+            "Other"
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "radio",
+          "text": "What is your highest educational qualification?",
+          "options": [
+            "School level",
+            "Undergraduate",
+            "Postgraduate",
+            "Other"
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "radio",
+          "text": "What is your field of study/work?",
+          "options": [
+            "Arts/Humanities",
+            "Commerce/Business",
+            "Science",
+            "Technology",
+            "Media/Communication",
+            "Other"
+          ]
+        }
+      ],
+      "title": "SECTION A: BASIC INFORMATION"
+    },
+    {
+      "description": "Habits and consumption of social media content",
+      "id": "section_b",
+      "questions": [
+        {
+          "id": "q5",
+          "type": "radio",
+          "text": "Which social media platform do you use most frequently?",
+          "options": [
+            "Instagram",
+            "Facebook",
+            "Both equally"
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "radio",
+          "text": "How much time do you spend daily on social media?",
+          "options": [
+            "Less than 1 hour",
+            "1–2 hours",
+            "3–4 hours",
+            "More than 5 hours"
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "radio",
+          "text": "What type of content do you mostly consume?",
+          "options": [
+            "Images",
+            "Videos/Reels",
+            "Text posts",
+            "Mixed content"
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "radio",
+          "text": "How often do you share social media posts?",
+          "options": [
+            "Rarely",
+            "Sometimes",
+            "Often",
+            "Very often"
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "radio",
+          "text": "Have you ever seen content online that looked fake or edited?",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "radio",
+          "text": "Do you follow news or information pages/accounts on social media?",
+          "options": [
+            "Yes",
+            "No"
+          ]
+        }
+      ],
+      "title": "SECTION B: SOCIAL MEDIA USAGE"
+    },
+    {
+      "description": "Please indicate how much you agree with the following statements. (1 = Strongly Disagree, 5 = Strongly Agree)",
+      "id": "section_c",
+      "questions": [
+        {
+          "id": "q11",
+          "type": "likert5",
+          "text": "I verify information before sharing it online."
+        },
+        {
+          "id": "q12",
+          "type": "likert5",
+          "text": "I check multiple sources before believing information online."
+        },
+        {
+          "id": "q13",
+          "type": "likert5",
+          "text": "I can identify misleading or fake content online."
+        },
+        {
+          "id": "q14",
+          "type": "likert5",
+          "text": "I pay attention to details in images and videos."
+        },
+        {
+          "id": "q15",
+          "type": "likert5",
+          "text": "I question the authenticity of viral content."
+        },
+        {
+          "id": "q16",
+          "type": "likert5",
+          "text": "I am aware that AI can create realistic fake images and videos."
+        },
+        {
+          "id": "q17",
+          "type": "likert5",
+          "text": "I try to identify whether online content is real or manipulated."
+        },
+        {
+          "id": "q18",
+          "type": "likert5",
+          "text": "I use fact-checking methods or websites when I doubt content."
+        }
+      ],
+      "title": "SECTION C: DIGITAL MEDIA LITERACY"
+    },
+    {
+      "description": "Diffusion of Innovations technology adoption profiling. (1 = Strongly Disagree, 5 = Strongly Agree)",
+      "id": "section_d",
+      "questions": [
+        {
+          "id": "q19",
+          "type": "likert5",
+          "text": "I like trying new technologies before others."
+        },
+        {
+          "id": "q20",
+          "type": "likert5",
+          "text": "I enjoy exploring new digital tools and apps."
+        },
+        {
+          "id": "q21",
+          "type": "likert5",
+          "text": "I usually adopt new technologies quickly."
+        },
+        {
+          "id": "q22",
+          "type": "likert5",
+          "text": "I feel comfortable learning new technologies on my own."
+        },
+        {
+          "id": "q23",
+          "type": "likert5",
+          "text": "I prefer to wait before using new technologies. (Reverse coded)"
+        },
+        {
+          "id": "q24",
+          "type": "likert5",
+          "text": "I depend on others to explain new technologies to me. (Reverse coded)"
+        }
+      ],
+      "title": "SECTION D: TECHNOLOGY ADOPTION (DOI)"
+    },
+    {
+      "description": "Analyze the following media files and determine if they are real or AI-generated.",
+      "id": "section_e",
+      "isMediaSection": true,
+      "mediaItems": [
+        {
+          "anomalies": "Symmetry errors in the backpack straps, surreal light source reflecting on the helmet visor showing trees, physics-defying lavender stems.",
+          "description": "Photorealistic depiction of an astronaut picking purple lavender under a bright orange Martian sky.",
+          "id": "m1",
+          "title": "1",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://cdn.mos.cms.futurecdn.net/43aVbKLKvmqfcfnR2YEvyA-1200-80.png.webp"
+        },
+        {
+          "anomalies": "No AI anomalies. Perfect reflections on wet floor, clear and legible price tags in Japanese kanji, anatomically correct hands holding ice scoop.",
+          "description": "Stunning street photography of a vendor smiling behind his seafood stall at Tsukiji Market, Tokyo.",
+          "id": "m2",
+          "title": "2",
+          "trueType": "real",
+          "type": "image",
+          "url": "https://cdn.mos.cms.futurecdn.net/kPFybQBSrpiuFeqi9UaDZ4-1200-80.jpg.webp"
+        },
+        {
+          "anomalies": "Surreal biological fusion, blending textures between turtle shell and fertile soil, impossible lighting patterns deep underwater.",
+          "description": "A giant sea turtle swimming in deep blue ocean waters with an entire tropical forest growing on its shell.",
+          "id": "m3",
+          "title": "3",
+          "trueType": "ai",
+          "type": "video",
+          "url": "https://youtu.be/cFzsUZyCReo"
+        },
+        {
+          "anomalies": "No AI anomalies. Flawless human anatomy, realistic physics-based liquid viscosity, consistent focus plane, authentic light refraction through honey.",
+          "description": "High-contrast close-up shot of liquid honey dripping between fingers, capturing natural skin pores and hair.",
+          "id": "m4",
+          "title": "4",
+          "trueType": "real",
+          "type": "video",
+          "url": "https://youtube.com/shorts/nJFe0JIcPf4?feature=share"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1779723216128",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "video",
+          "url": "https://youtu.be/gjCJ8VV2ahs?si=kOl6psyQrnOQfGUM"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1779808818518",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ95EQHFKXOpaKUY7Xeno-Q7_P9_nCqByGvZA&s"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780105171420",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://i.ibb.co/G4w0NRC0/ai-generated-indian-female-student-free-photo.jpg"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780105173885",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "video",
+          "url": "https://youtube.com/shorts/3pVgdYXYbBE?feature=share"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780105174671",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "video",
+          "url": "https://youtube.com/shorts/LWY-W_CyFfQ?feature=share"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780105174809",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "link",
+          "url": "https://youtube.com/shorts/5IohHlzyVdo?feature=share"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780105175026",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "video",
+          "url": "https://youtube.com/shorts/uzLYcgTVs5E?feature=share"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780289773130",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://i.ibb.co/VcTKFpfT/images-3.jpg"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780289775250",
+          "title": "New Media Test Asset",
+          "trueType": "real",
+          "type": "image",
+          "url": "https://i.ibb.co/hJ4K0T32/images-2.jpg"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780289776666",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://i.ibb.co/0VWm5m4f/eb00a5c5-ba32-4ada-8b6e-ddf0fe6c350b.avif"
+        },
+        {
+          "anomalies": "List any digital artifacts or symmetry errors...",
+          "description": "Provide details about this image asset...",
+          "id": "m_1780290840244",
+          "title": "New Media Test Asset",
+          "trueType": "ai",
+          "type": "video",
+          "url": "https://youtu.be/twuTh5IOxVs        "
+        }
+      ],
+      "title": "SECTION E: AI-GENERATED CONTENT DETECTION"
+    },
+    {
+      "description": "General public awareness and ethical stance regarding AI-generated media",
+      "id": "section_f",
+      "questions": [
+        {
+          "id": "q28",
+          "type": "radio",
+          "text": "Have you heard the term “deepfake” before?",
+          "options": [
+            "Yes",
+            "No"
+          ]
+        },
+        {
+          "id": "q29",
+          "type": "radio",
+          "text": "Do you think AI-generated content is becoming more common online?",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ]
+        },
+        {
+          "id": "q30",
+          "type": "radio",
+          "text": "Do you think AI-generated content can mislead people?",
+          "options": [
+            "Yes",
+            "No",
+            "Maybe"
+          ]
+        },
+        {
+          "id": "q31",
+          "type": "radio",
+          "text": "Do you think social media platforms should label AI-generated content?",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ]
+        },
+        {
+          "id": "q32",
+          "type": "radio",
+          "text": "Do you trust images and videos shared on social media?",
+          "options": [
+            "Yes",
+            "No",
+            "Sometimes"
+          ]
+        },
+        {
+          "id": "q33",
+          "type": "radio",
+          "text": "Do you think younger users are better at identifying fake AI content?",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ]
+        }
+      ],
+      "title": "SECTION F: AWARENESS & OPINION"
+    },
+    {
+      "description": "Qualitative feedback on personal experiences with AI content",
+      "id": "section_g",
+      "questions": [
+        {
+          "id": "q34",
+          "type": "textarea",
+          "text": "Do you have any thoughts or experiences related to AI-generated content?",
+          "placeholder": "Type your experiences, concerns, or feedback here..."
+        }
+      ],
+      "title": "SECTION G: OPTIONAL RESPONSE"
+    }
+  ],
+  "title": "Detection of AI-Generated Images and Videos on Social Media"
+}

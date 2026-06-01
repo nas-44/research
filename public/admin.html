@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MA Dissertation CMS: Academic Survey & Statistical Analysis Center</title>
+  
+  <!-- Fonts & Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Master Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <nav class="nav-header">
+    <div class="nav-brand">
+      <i class="fa-solid fa-square-poll-vertical"></i>
+      SURVEY ADMINISTRATION <span>CMS Dashboard</span>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-switch" id="admin-theme-toggle" title="Toggle Light/Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <a href="index.html" class="btn btn-primary">
+        <i class="fa-solid fa-eye"></i> View Live Survey
+      </a>
+    </div>
+  </nav>
+
+  <!-- Admin Layout Wrapper -->
+  <div class="admin-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <button class="sidebar-tab active-tab" data-tab="tab-dashboard">
+        <i class="fa-solid fa-chart-pie"></i> Executive Summary
+      </button>
+      <button class="sidebar-tab" data-tab="tab-builder">
+        <i class="fa-solid fa-file-pen"></i> Form Builder & Editor
+      </button>
+      <button class="sidebar-tab" data-tab="tab-analytics">
+        <i class="fa-solid fa-calculator"></i> Dissertation Analytics
+      </button>
+      <button class="sidebar-tab" data-tab="tab-database">
+        <i class="fa-solid fa-database"></i> Response Database
+      </button>
+      
+      <hr style="border:0; border-top: 1px solid var(--border-color); margin: 20px 0;">
+      
+      <div style="padding: 0 15px;">
+        <p style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 10px;">
+          Mock Database Controls
+        </p>
+        <button class="btn btn-secondary btn-sm w-full" id="btn-generate-mock-50" style="padding: 8px 12px; font-size: 0.8rem; margin-bottom: 10px;">
+          <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--secondary);"></i> Inject 50 Samples
+        </button>
+        <button class="btn btn-danger btn-sm w-full" id="btn-clear-db" style="padding: 8px 12px; font-size: 0.8rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: var(--danger);">
+          <i class="fa-solid fa-trash-can"></i> Clear All Data
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-content">
+      
+      <!-- 1. EXECUTIVE SUMMARY TAB -->
+      <section id="tab-dashboard" class="tab-content">
+        <div class="card-header">
+          <span class="section-tag">Summary Dashboard</span>
+          <h1 class="card-title">Executive Overview</h1>
+          <p class="card-description">High-level metrics and aggregate key performance indicators from the active respondent pool.</p>
+        </div>
+        
+        <!-- Metrics Summary Grid -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-total-respondents">0</span>
+              <span class="stat-label">Total Sample (N)</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-detection-accuracy">0.0%</span>
+              <span class="stat-label">Detection Accuracy</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-avg-literacy">0.0/5</span>
+              <span class="stat-label">Avg. Media Literacy</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
+            <div class="stat-info">
+              <span class="stat-value" id="stat-avg-adoption">0.0/5</span>
+              <span class="stat-label">Avg. Tech Adoption</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Summary Charts Grid -->
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <h3 class="chart-card-title">AI Detection Success Rates</h3>
+                <span class="chart-card-subtitle">Percentage of respondents correctly classifying each media asset</span>
+              </div>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chart-detection-success"></canvas>
+            </div>
+          </div>
+          
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <h3 class="chart-card-title">Primary Social Media Channels</h3>
+                <span class="chart-card-subtitle">Distribution of most frequently utilized platforms</span>
+              </div>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="chart-social-platforms"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quick Insight Card -->
+        <div class="card">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-lightbulb" style="color: var(--warning);"></i> Preliminary Thesis Insights
+          </h3>
+          <p id="dashboard-insight-text" style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8;">
+            Please load or generate survey data to observe research findings. In general, this dissertation investigates the theoretical linkages between a participant's self-assessed digital media literacy, their technology adoption category (Rogers' DOI), and their empirical ability to identify AI-generated artifacts under pressure.
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. FORM BUILDER TAB -->
+      <section id="tab-builder" class="tab-content" style="display: none;">
+        <div class="card-header">
+          <span class="section-tag">Google Forms style Builder</span>
+          <h1 class="card-title">Form Configurator</h1>
+          <p class="card-description">Configure general settings, participant consent text, and dynamically manage questions and media test content.</p>
+        </div>
+        
+        <!-- Survey Metadata Configuration -->
+        <div class="card">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 20px;">
+            <i class="fa-solid fa-sliders" style="color: var(--primary); margin-right: 8px;"></i> General Survey Settings
+          </h3>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;">Survey Title</label>
+            <input type="text" class="text-input" id="builder-survey-title" value="">
+          </div>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;">Survey Description / Academic Institution</label>
+            <input type="text" class="text-input" id="builder-survey-description" value="">
+          </div>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;">Consent Agreement Text</label>
+            <textarea class="text-input" id="builder-survey-consent" style="min-height: 120px;"></textarea>
+          </div>
+          <div style="display: flex; justify-content: flex-end;">
+            <button class="btn btn-primary" id="btn-save-builder-meta">
+              <i class="fa-solid fa-floppy-disk"></i> Save Settings
+            </button>
+          </div>
+        </div>
+        
+        <!-- Media Items Configuration Editor (Section E) -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.3rem;">
+              <i class="fa-solid fa-photo-film" style="color: var(--secondary); margin-right: 8px;"></i> 
+              Section E: Media Test Items Editor
+            </h3>
+            <button class="btn btn-secondary btn-sm" id="btn-add-media-item">
+              <i class="fa-solid fa-plus"></i> Add Test Media
+            </button>
+          </div>
+          <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
+            Manage the photographs and videos that participants analyze in the survey. You can configure their URLs, define their ground truth labels, and record structural anomalies for reporting.
+          </p>
+          
+          <!-- Dynamic media item editors list -->
+          <div id="builder-media-items-list" class="flex flex-col gap-4">
+            <!-- Media cards injected here -->
+          </div>
+          
+          <div style="display: flex; justify-content: flex-end; margin-top: 25px;">
+            <button class="btn btn-success" id="btn-save-media-items">
+              <i class="fa-solid fa-circle-check"></i> Save Media Configuration
+            </button>
+          </div>
+        </div>
+        
+        <!-- Questions Manager -->
+        <div class="card">
+          <h3 style="font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 20px;">
+            <i class="fa-solid fa-circle-question" style="color: var(--accent); margin-right: 8px;"></i> 
+            Sections & Questionnaires Editor
+          </h3>
+          <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem;">
+            Edit sections, question text, response types, and multiple choice options.
+          </p>
+          
+          <div id="builder-sections-list">
+            <!-- Sections and questions will be rendered here dynamically -->
+          </div>
+          
+          <div style="display: flex; gap: 15px; justify-content: space-between; margin-top: 25px; border-top: 1px solid var(--border-color); padding-top: 25px; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="addSection()">
+              <i class="fa-solid fa-plus"></i> Create New Section
+            </button>
+            <button class="btn btn-success" id="btn-save-questions-config">
+              <i class="fa-solid fa-floppy-disk"></i> Save Complete Configuration
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. DISSERTATION ANALYTICS TAB -->
+      <section id="tab-analytics" class="tab-content" style="display: none;">
+        <div class="card-header">
+          <span class="section-tag">Academic Statistical Tools</span>
+          <h1 class="card-title">Dissertation Analytical Center</h1>
+          <p class="card-description">High-grade statistical computations and psychological scale diagnostics required for postgraduate level quantitative dissertation.</p>
+        </div>
+        
+        <!-- Descriptive Statistics Table -->
+        <div class="card">
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px;">
+            <i class="fa-solid fa-list-ol" style="color: var(--primary); margin-right: 8px;"></i>
+            Descriptive Statistics (Sample Demographics & Distributions)
+          </h2>
+          <div class="academic-explanation">
+            <strong>Descriptive Statistics</strong> summarize the characteristics of the sample dataset. For categorical demographics (e.g., Age, Gender), we report frequencies ($n$) and valid percentages (%). For continuous indices (e.g., Media Literacy Score), we report the Sample Mean ($M$) and Standard Deviation ($SD$).
+          </div>
+          
+          <div class="crosstab-wrapper" style="margin-top: 15px;">
+            <table class="crosstab-table">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Variable</th>
+                  <th>Category / Metric</th>
+                  <th>Frequency ($n$) / Mean ($M$)</th>
+                  <th>Percentage (%) / SD</th>
+                </tr>
+              </thead>
+              <tbody id="descriptive-stats-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <!-- Psychometric Scale Reliability -->
+        <div class="card">
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px;">
+            <i class="fa-solid fa-square-check" style="color: var(--success); margin-right: 8px;"></i>
+            Psychometric Scale Reliability (Cronbach's Alpha)
+          </h2>
+          <div class="academic-explanation">
+            <strong>What is Cronbach's Alpha ($\alpha$)?</strong> It is a measure of internal consistency reliability. For Likert-scale indexes used in theses (e.g., Section C and Section D), it proves that your questions consistently measure the exact same latent psychological variable. An $\alpha \ge 0.70$ is the standard academic threshold for acceptable reliability.
+          </div>
+          
+          <!-- Section C scale alpha -->
+          <div class="reliability-metric">
+            <div class="reliability-value-box">
+              <span class="reliability-val" id="alpha-val-literacy">0.00</span>
+              <span class="reliability-lbl">Alpha (&alpha;)</span>
+            </div>
+            <div class="reliability-desc">
+              <span class="reliability-status status-excellent" id="alpha-status-literacy">Awaiting data...</span>
+              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Digital Media Literacy Scale (Section C: Q11 - Q18)</h3>
+              <p style="font-size: 0.9rem;" id="alpha-desc-literacy">This scale comprises 8 Likert items assessing self-reported confirmation bias, resource auditing, visual attentiveness, and awareness of generative AI techniques.</p>
+            </div>
+          </div>
+
+          <!-- Section D scale alpha -->
+          <div class="reliability-metric">
+            <div class="reliability-value-box">
+              <span class="reliability-val" id="alpha-val-adoption">0.00</span>
+              <span class="reliability-lbl">Alpha (&alpha;)</span>
+            </div>
+            <div class="reliability-desc">
+              <span class="reliability-status status-good" id="alpha-status-adoption">Awaiting data...</span>
+              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Technology Adoption Profile (Section D: Q19 - Q24)</h3>
+              <p style="font-size: 0.9rem;" id="alpha-desc-adoption">This scale comprises 6 Likert items measuring technology exploration enthusiasm, self-directed learning comfort, and reliance, including 2 reverse-coded items.</p>
+            </div>
+          </div>
+          
+          <div style="margin-top: 20px; padding: 15px; border-radius: var(--radius-md); background: rgba(255,255,255,0.02); border: 1px solid var(--border-color);">
+            <strong>Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy approximation:</strong>
+            <div id="validity-assessment-body" style="margin-top: 8px; color: var(--text-secondary);">
+              Awaiting dataset to compute inter-item correlation matrix and validity metrics...
+            </div>
+          </div>
+        </div>
+        
+        <!-- Bivariate Crosstabulations & Chi-Square Significance -->
+        <div class="card">
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px;">
+            <i class="fa-solid fa-table-cells" style="color: var(--primary); margin-right: 8px;"></i>
+            Demographic Crosstabulations & Chi-Square Significance ($\chi^2$)
+          </h2>
+          <div class="academic-explanation">
+            <strong>Cross-tabulations</strong> reveal relationships between demographic variables (independent) and empirical AI detection accuracy (dependent). The <strong>Chi-Square Test of Independence</strong> computes a p-value indicating whether these differences are statistically significant or occurred by random chance. A $p < 0.05$ indicates a strong scholarly relationship!
+          </div>
+          
+          <div class="form-group flex align-center gap-4" style="margin-bottom: 25px;">
+            <label class="question-text" style="margin-bottom: 0; font-size: 1rem;">Select Independent Variable (Demographic):</label>
+            <select class="builder-select" id="crosstab-select-var" style="width: 240px;" onchange="updateCrosstabulation()">
+              <option value="q1">Age Group (Section A1)</option>
+              <option value="q2">Gender (Section A2)</option>
+              <option value="q3">Educational Level (Section A3)</option>
+              <option value="q4">Field of Study/Work (Section A4)</option>
+            </select>
+          </div>
+          
+          <!-- Crosstab table display -->
+          <div class="crosstab-wrapper">
+            <table class="crosstab-table" id="crosstab-table-body">
+              <!-- Injected dynamically -->
+            </table>
+          </div>
+          
+          <!-- Chi square summary display -->
+          <div id="chisquare-results-card" style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 18px; border-radius: var(--radius-md); font-size: 0.95rem;">
+            <!-- Chi-square metrics -->
+          </div>
+        </div>
+
+        <!-- One-Way ANOVA Card -->
+        <div class="card">
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px;">
+            <i class="fa-solid fa-chart-line" style="color: var(--secondary); margin-right: 8px;"></i>
+            One-Way Analysis of Variance (ANOVA)
+          </h2>
+          <div class="academic-explanation">
+            <strong>What is One-Way ANOVA?</strong> It compares the mean AI Detection Accuracy scores across different demographic groups to determine if at least one group performs significantly differently. An $F$-ratio with a $p < 0.05$ proves a statistically significant demographic difference!
+          </div>
+          
+          <div class="form-group flex align-center gap-4" style="margin-bottom: 25px;">
+            <label class="question-text" style="margin-bottom: 0; font-size: 1rem;">Select Grouping Factor (Independent Variable):</label>
+            <select class="builder-select" id="anova-select-var" style="width: 240px;" onchange="runAnovaAnalysis()">
+              <option value="q1">Age Group (Section A1)</option>
+              <option value="q2">Gender (Section A2)</option>
+              <option value="q3">Educational Level (Section A3)</option>
+              <option value="q4">Field of Study/Work (Section A4)</option>
+            </select>
+          </div>
+          
+          <!-- ANOVA table display -->
+          <div class="crosstab-wrapper" style="margin-top: 15px;">
+            <table class="crosstab-table">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Source of Variation</th>
+                  <th>Sum of Squares (SS)</th>
+                  <th>Degrees of Freedom (df)</th>
+                  <th>Mean Square (MS)</th>
+                  <th>F-Ratio</th>
+                  <th>p-value</th>
+                </tr>
+              </thead>
+              <tbody id="anova-table-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="anova-eta-squared">0.000</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Effect Size ($\eta^2$)</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);" id="anova-levenes-test">p = 0.000</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Levene's Test (Equality of Variance)</div>
+            </div>
+          </div>
+          
+          <!-- Post-Hoc Comparisons Table -->
+          <div class="crosstab-wrapper" style="margin-top: 15px; display: none;" id="anova-posthoc-wrapper">
+            <h4 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 10px;">Post-Hoc Comparisons (Bonferroni)</h4>
+            <table class="crosstab-table">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Pairwise Comparison</th>
+                  <th>Mean Difference</th>
+                  <th>t-Statistic</th>
+                  <th>p-value (Adjusted)</th>
+                  <th>Significance</th>
+                </tr>
+              </thead>
+              <tbody id="anova-posthoc-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div id="anova-interpretation" style="margin-top: 18px; padding: 15px; border-radius: var(--radius-md); font-size: 0.95rem;">
+            <!-- Dynamic interpretation -->
+          </div>
+          
+          <!-- ANOVA Enhancements (Levene, Eta Squared, Post-Hoc) -->
+          <div id="anova-enhancements" style="display: none; margin-top: 25px; border-top: 1px dashed var(--border-color); padding-top: 20px;">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+              <!-- Eta Squared -->
+              <div style="flex: 1; min-width: 200px; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md);">
+                <h4 style="font-family: var(--font-heading); margin-bottom: 8px;">Effect Size ($\eta^2$)</h4>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="anova-eta-squared">0.000</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);" id="anova-eta-interp">Small effect</div>
+              </div>
+              
+              <!-- Levene's Test -->
+              <div style="flex: 1; min-width: 250px; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md);">
+                <h4 style="font-family: var(--font-heading); margin-bottom: 8px;">Levene's Test for Equality of Variances</h4>
+                <div style="font-size: 1.1rem; font-weight: 700;" id="anova-levene-result">W = 0.00, p = 1.000</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);" id="anova-levene-interp">Variances are equal.</div>
+              </div>
+            </div>
+            
+            <!-- Post-Hoc Bonferroni -->
+            <div id="anova-posthoc-container" style="margin-top: 20px;">
+              <h4 style="font-family: var(--font-heading); margin-bottom: 10px;">Post-Hoc Pairwise Comparisons (Bonferroni-Corrected t-tests)</h4>
+              <div class="crosstab-wrapper">
+                <table class="crosstab-table">
+                  <thead>
+                    <tr>
+                      <th style="text-align: left;">Comparison (Group A vs Group B)</th>
+                      <th>Mean Diff (A - B)</th>
+                      <th>Std. Error</th>
+                      <th>p-value (Corrected)</th>
+                      <th>Significance</th>
+                    </tr>
+                  </thead>
+                  <tbody id="anova-posthoc-body">
+                    <!-- Injected dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Linear Regression Model -->
+        <div class="card">
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px;">
+            <i class="fa-solid fa-calculator" style="color: var(--accent); margin-right: 8px;"></i>
+            Multiple Linear Regression Model
+          </h2>
+          <div class="academic-explanation">
+            <strong>What is Multiple Linear Regression?</strong> It predicts a respondent's empirical AI Detection Accuracy ($Y$) based on two continuous predictors: their Digital Media Literacy Score ($X_1$) and their Technology Adoption Score ($X_2$). The formula modeled is: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2$$
+          </div>
+          
+          <!-- Regression Coefficients Table -->
+          <div class="crosstab-wrapper" style="margin-top: 15px;">
+            <table class="crosstab-table">
+              <thead>
+                <tr>
+                  <th style="text-align: left;">Predictor Variable</th>
+                  <th>Coefficient ($\beta$)</th>
+                  <th>Standard Error (SE)</th>
+                  <th>t-Statistic</th>
+                  <th>p-value</th>
+                  <th>Significance</th>
+                </tr>
+              </thead>
+              <tbody id="regression-table-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Overall Model Fit -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="reg-r2">0.000</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">R-Squared ($R^2$)</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);" id="reg-adj-r2">0.000</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Adjusted $R^2$</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--success);" id="reg-f-sig">p = 0.000</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Overall Model Fit ($F$)</div>
+            </div>
+          </div>
+
+          <!-- Regression Assumptions -->
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; margin-top: 25px; margin-bottom: 5px;">Regression Assumptions</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px;">
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="reg-vif-lit">0.00</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">VIF (Literacy)</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="reg-vif-adopt">0.00</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">VIF (Adoption)</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
+              <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);" id="reg-jarque-bera">p = 0.000</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Normality of Residuals (Jarque-Bera)</div>
+            </div>
+          </div>
+          
+          <div id="regression-interpretation" style="margin-top: 18px; padding: 15px; border-radius: var(--radius-md); font-size: 0.95rem; line-height: 1.6;">
+            <!-- Dynamic interpretation -->
+          </div>
+          
+          <!-- Regression Assumptions (VIF, Normality) -->
+          <div id="regression-assumptions" style="display: none; margin-top: 25px; border-top: 1px dashed var(--border-color); padding-top: 20px;">
+            <h3 style="font-family: var(--font-heading); font-size: 1.25rem; margin-bottom: 15px;">Regression Assumptions Testing</h3>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+              <!-- VIF -->
+              <div style="flex: 1; min-width: 250px; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md);">
+                <h4 style="font-family: var(--font-heading); margin-bottom: 8px;">Variance Inflation Factor (VIF)</h4>
+                <table style="width: 100%; font-size: 0.9rem; text-align: left; margin-bottom: 8px;">
+                  <tr><td>Literacy Score:</td><td style="font-weight:700;" id="reg-vif-lit">0.00</td></tr>
+                  <tr><td>Adoption Score:</td><td style="font-weight:700;" id="reg-vif-adopt">0.00</td></tr>
+                </table>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);" id="reg-vif-interp">No multicollinearity.</div>
+              </div>
+              
+              <!-- Normality Test -->
+              <div style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md);">
+                <h4 style="font-family: var(--font-heading); margin-bottom: 8px;">Normality of Residuals (Jarque-Bera Test)</h4>
+                <div style="font-size: 1.1rem; font-weight: 700;" id="reg-jb-result">JB = 0.00, p = 1.000</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);" id="reg-jb-interp">Residuals are normally distributed.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Correlation Scatter Analysis -->
+        <div class="chart-grid">
+          <!-- Pearson Correlation Chart -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <h3 class="chart-card-title">Pearson Correlation: Literacy vs. AI Detection Accuracy</h3>
+                <span class="chart-card-subtitle">Analyzing if digital literacy (C) correlates with factual accuracy (E)</span>
+              </div>
+            </div>
+            <div class="chart-wrapper" style="height: 380px;">
+              <canvas id="chart-correlation-scatter"></canvas>
+            </div>
+            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+              <div style="font-size: 0.9rem;" id="correlation-math-output">
+                <!-- Pearson math output -->
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btn-download-scatter" style="padding: 5px 12px; font-size: 0.75rem; white-space: nowrap;">
+                <i class="fa-solid fa-download"></i> Save Graph (PNG)
+              </button>
+            </div>
+          </div>
+          
+          <!-- DOI Innovation Categories Chart -->
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div>
+                <h3 class="chart-card-title">Rogers' Diffusion of Innovations (DOI) Curve</h3>
+                <span class="chart-card-subtitle">Distribution of technology adoption categories based on Section D</span>
+              </div>
+            </div>
+            <div class="chart-wrapper" style="height: 380px;">
+              <canvas id="chart-doi-bellcurve"></canvas>
+            </div>
+            <div style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+              <div style="font-size: 0.9rem;" id="doi-profile-output">
+                <!-- DOI categories output -->
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btn-download-bell" style="padding: 5px 12px; font-size: 0.75rem; white-space: nowrap;">
+                <i class="fa-solid fa-download"></i> Save Graph (PNG)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. RESPONSES DATABASE TAB -->
+      <section id="tab-database" class="tab-content" style="display: none;">
+        <div class="card-header">
+          <span class="section-tag">Participant Records Database</span>
+          <h1 class="card-title">Active Response Database</h1>
+          <p class="card-description">View, search, filter and inspect individual survey sheets. Export results as clean Excel-compatible CSVs for direct SPSS/R package import.</p>
+        </div>
+        
+        <div class="card" style="padding: 24px;">
+          <!-- Table Controls header -->
+          <div class="table-actions">
+            <div class="search-bar position-relative">
+              <input type="text" class="text-input" id="db-search-input" placeholder="Search open responses (Q34) or demographics..." style="padding: 10px 16px; font-size: 0.9rem;">
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary" id="btn-export-csv">
+                <i class="fa-solid fa-file-excel" style="color: var(--success);"></i> Export to CSV (SPSS/Excel)
+              </button>
+            </div>
+          </div>
+          
+          <!-- Data Table Wrapper -->
+          <div class="data-table-wrapper">
+            <table class="data-table" id="responses-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Participant</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Education</th>
+                  <th>Media Literacy</th>
+                  <th>Tech Adoption</th>
+                  <th>AI Detection Rate</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="responses-table-body">
+                <!-- Records injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div id="table-empty-state" style="display: none; padding: 40px; text-align: center; color: var(--text-muted);">
+            <i class="fa-solid fa-box-open" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+            <p>No participant responses found in the database. Use the sidebar wizard to inject mock data or submit a response on the live survey page.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Detailed Questionnaire Sheet Inspector Modal -->
+  <div class="modal" id="sheet-inspect-modal">
+    <div class="modal-content-wrapper" style="width: 100%; max-width: 800px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 35px; overflow-y: auto; max-height: 85vh; position: relative;">
+      <button class="modal-close" id="sheet-close-btn" style="top: 15px; right: 20px; font-size: 1.6rem;">&times;</button>
+      <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px;">
+        <span class="section-tag" style="background: rgba(99, 102, 241, 0.1); color: var(--primary);">Respondent Record Sheet</span>
+        <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin-top: 5px;" id="inspect-sheet-title">Respondent Details</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted);" id="inspect-sheet-meta">Submitted: 2026-05-24 07:15</p>
+      </div>
+      
+      <!-- Injected sheet content -->
+      <div id="inspect-sheet-body" style="display: flex; flex-direction: column; gap: 25px;">
+        <!-- Filled sections here -->
+      </div>
+      
+      <div style="margin-top: 35px; border-top: 1px solid var(--border-color); padding-top: 20px; display: flex; justify-content: flex-end;">
+        <button class="btn btn-secondary" onclick="document.getElementById('sheet-inspect-modal').style.display='none';">Close Record</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="admin-toast-notify">
+    <i class="fa-solid fa-circle-info" id="admin-toast-icon"></i>
+    <span id="admin-toast-message">Notification!</span>
+  </div>
+
+  <!-- Administration JS Code -->
+  <script src="admin.js"></script>
+</body>
+</html>

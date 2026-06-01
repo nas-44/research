@@ -1,0 +1,18 @@
+{
+  "name": "ai-detection-survey-cms",
+  "version": "1.0.0",
+  "description": "Academic Survey and Advanced CMS Dashboard for AI-Generated Content Detection",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "echo 'No build step required for Express static server'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "firebase": "^12.13.0"
+  },
+  "author": "Antigravity",
+  "license": "MIT"
+}
