@@ -42,7 +42,7 @@ if (fs.existsSync(ENV_PATH)) {
 }
 
 // Log status of the hybrid cloud data store integration
-const FIREBASE_DB_URL = process.env.FIREBASE_DB_URL;
+const FIREBASE_DB_URL = process.env.FIREBASE_DB_URL || 'https://research-344f8-default-rtdb.asia-southeast1.firebasedatabase.app';
 if (FIREBASE_DB_URL) {
   console.log(`⚡ HYBRID CLOUD DATA INTEGRATION: Enabled!`);
   console.log(`   Connected to Firebase Realtime Database at: ${FIREBASE_DB_URL}`);
