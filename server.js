@@ -125,209 +125,288 @@ function writeJSON(filePath, data) {
 
 // Default Survey Configuration (matching user's prompt exactly)
 const defaultSurveyConfig = {
-  title: "Detection of AI-Generated Images and Videos on Social Media",
-  description: "Academic Research Survey in Journalism and Mass Communication",
-  consentText: "Hello,\nThis survey is conducted as part of an academic research study in Journalism and Mass Communication. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
-  sections: [
+  "title": "Academic Survey: AI-Generated Content Detection on Social Media",
+  "description": "Academic Research Study",
+  "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+  "sections": [
     {
-      id: "section_a",
-      title: "SECTION A: BASIC INFORMATION",
-      description: "Demographic profile of the participant",
-      questions: [
+      "id": "section_a",
+      "title": "SECTION A: Demographic Information",
+      "description": "Please provide your demographic details.",
+      "questions": [
         {
-          id: "q1",
-          type: "radio",
-          text: "What is your age?",
-          options: ["18–21", "22–25", "26–30", "31–40", "41+"]
+          "id": "q1",
+          "type": "radio",
+          "text": "1. Gender",
+          "options": [
+            "Male",
+            "Female",
+            "Other",
+            "Prefer not to say"
+          ]
         },
         {
-          id: "q2",
-          type: "radio",
-          text: "What is your gender?",
-          options: ["Male", "Female", "Prefer not to say", "Other"]
+          "id": "q2",
+          "type": "radio",
+          "text": "2. Age",
+          "options": [
+            "18–24",
+            "25–34",
+            "35–44",
+            "45–54",
+            "55+"
+          ]
         },
         {
-          id: "q3",
-          type: "radio",
-          text: "What is your highest educational qualification?",
-          options: ["School level", "Undergraduate", "Postgraduate", "Other"]
+          "id": "q3",
+          "type": "radio",
+          "text": "3. Educational Qualification",
+          "options": [
+            "Higher Secondary",
+            "Diploma",
+            "Undergraduate",
+            "Postgraduate",
+            "Other"
+          ]
         },
         {
-          id: "q4",
-          type: "radio",
-          text: "What is your field of study/work?",
-          options: ["Arts/Humanities", "Commerce/Business", "Science", "Technology", "Media/Communication", "Other"]
+          "id": "q4",
+          "type": "radio",
+          "text": "4. Which platform do you use most frequently?",
+          "options": [
+            "Instagram",
+            "Facebook",
+            "Both equally"
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "radio",
+          "text": "5. Average daily social media use",
+          "options": [
+            "Less than 1 hour",
+            "1–2 hours",
+            "3–4 hours",
+            "5–6 hours",
+            "More than 6 hours"
+          ]
         }
       ]
     },
     {
-      id: "section_b",
-      title: "SECTION B: SOCIAL MEDIA USAGE",
-      description: "Habits and consumption of social media content",
-      questions: [
+      "id": "section_b",
+      "title": "SECTION B: Digital Media Literacy",
+      "description": "Indicate your level of agreement. (1 = Strongly Disagree, 5 = Strongly Agree)",
+      "questions": [
         {
-          id: "q5",
-          type: "radio",
-          text: "Which social media platform do you use most frequently?",
-          options: ["Instagram", "Facebook", "Both equally"]
+          "id": "q6",
+          "type": "likert5",
+          "text": "Information Evaluation: I verify information before sharing it online."
         },
         {
-          id: "q6",
-          type: "radio",
-          text: "How much time do you spend daily on social media?",
-          options: ["Less than 1 hour", "1–2 hours", "3–4 hours", "More than 5 hours"]
+          "id": "q7",
+          "type": "likert5",
+          "text": "Information Evaluation: I compare information from multiple sources before believing it."
         },
         {
-          id: "q7",
-          type: "radio",
-          text: "What type of content do you mostly consume?",
-          options: ["Images", "Videos/Reels", "Text posts", "Mixed content"]
+          "id": "q8",
+          "type": "likert5",
+          "text": "Information Evaluation: I can identify unreliable online information."
         },
         {
-          id: "q8",
-          type: "radio",
-          text: "How often do you share social media posts?",
-          options: ["Rarely", "Sometimes", "Often", "Very often"]
+          "id": "q9",
+          "type": "likert5",
+          "text": "Information Evaluation: I pay attention to the source of information before trusting it."
         },
         {
-          id: "q9",
-          type: "radio",
-          text: "Have you ever seen content online that looked fake or edited?",
-          options: ["Yes", "No", "Not sure"]
+          "id": "q10",
+          "type": "likert5",
+          "text": "Platform Awareness: I understand that social media algorithms influence the content I see."
         },
         {
-          id: "q10",
-          type: "radio",
-          text: "Do you follow news or information pages/accounts on social media?",
-          options: ["Yes", "No"]
+          "id": "q11",
+          "type": "likert5",
+          "text": "Platform Awareness: I am aware that AI can generate realistic images and videos."
+        },
+        {
+          "id": "q12",
+          "type": "likert5",
+          "text": "Platform Awareness: I understand that visual content on social media may be manipulated."
+        },
+        {
+          "id": "q13",
+          "type": "likert5",
+          "text": "Critical Thinking: I question information that seems sensational or emotionally provocative."
+        },
+        {
+          "id": "q14",
+          "type": "likert5",
+          "text": "Critical Thinking: I look for evidence before accepting online claims."
+        },
+        {
+          "id": "q15",
+          "type": "likert5",
+          "text": "Critical Thinking: I critically evaluate visual content before believing it."
         }
       ]
     },
     {
-      id: "section_c",
-      title: "SECTION C: DIGITAL MEDIA LITERACY",
-      description: "Please indicate how much you agree with the following statements. (1 = Strongly Disagree, 5 = Strongly Agree)",
-      questions: [
-        { id: "q11", type: "likert5", text: "I verify information before sharing it online." },
-        { id: "q12", type: "likert5", text: "I check multiple sources before believing information online." },
-        { id: "q13", type: "likert5", text: "I can identify misleading or fake content online." },
-        { id: "q14", type: "likert5", text: "I pay attention to details in images and videos." },
-        { id: "q15", type: "likert5", text: "I question the authenticity of viral content." },
-        { id: "q16", type: "likert5", text: "I am aware that AI can create realistic fake images and videos." },
-        { id: "q17", type: "likert5", text: "I try to identify whether online content is real or manipulated." },
-        { id: "q18", type: "likert5", text: "I use fact-checking methods or websites when I doubt content." }
-      ]
-    },
-    {
-      id: "section_d",
-      title: "SECTION D: TECHNOLOGY ADOPTION (DOI)",
-      description: "Diffusion of Innovations technology adoption profiling. (1 = Strongly Disagree, 5 = Strongly Agree)",
-      questions: [
-        { id: "q19", type: "likert5", text: "I like trying new technologies before others." },
-        { id: "q20", type: "likert5", text: "I enjoy exploring new digital tools and apps." },
-        { id: "q21", type: "likert5", text: "I usually adopt new technologies quickly." },
-        { id: "q22", type: "likert5", text: "I feel comfortable learning new technologies on my own." },
-        { id: "q23", type: "likert5", text: "I prefer to wait before using new technologies. (Reverse coded)", isReverse: true },
-        { id: "q24", type: "likert5", text: "I depend on others to explain new technologies to me. (Reverse coded)", isReverse: true }
-      ]
-    },
-    {
-      id: "section_e",
-      title: "SECTION E: AI-GENERATED CONTENT DETECTION",
-      description: "Analyze the following media files and determine if they are real or AI-generated.",
-      isMediaSection: true,
-      mediaItems: [
+      "id": "section_c",
+      "title": "SECTION C: Verification Behaviour",
+      "description": "Frequency Scale (1 = Never, 5 = Always)",
+      "questions": [
         {
-          id: "m1",
-          type: "image",
-          title: "Astronaut in Lavender Mars Field",
-          url: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
-          trueType: "ai",
-          description: "Photorealistic depiction of an astronaut picking purple lavender under a bright orange Martian sky.",
-          anomalies: "Symmetry errors in the backpack straps, surreal light source reflecting on the helmet visor showing trees, physics-defying lavender stems."
+          "id": "q16",
+          "type": "likert5Freq",
+          "text": "I check the original source of a post."
         },
         {
-          id: "m2",
-          type: "image",
-          title: "Tokyo Market Stall Vendor",
-          url: "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
-          trueType: "real",
-          description: "Stunning street photography of a vendor smiling behind his seafood stall at Tsukiji Market, Tokyo.",
-          anomalies: "No AI anomalies. Perfect reflections on wet floor, clear and legible price tags in Japanese kanji, anatomically correct hands holding ice scoop."
+          "id": "q17",
+          "type": "likert5Freq",
+          "text": "I search online to verify suspicious images."
         },
         {
-          id: "m3",
-          type: "image",
-          title: "The Floating Island Turtle",
-          url: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800",
-          trueType: "ai",
-          description: "A giant sea turtle swimming in deep blue ocean waters with an entire tropical forest growing on its shell.",
-          anomalies: "Surreal biological fusion, blending textures between turtle shell and fertile soil, impossible lighting patterns deep underwater."
+          "id": "q18",
+          "type": "likert5Freq",
+          "text": "I read comments or discussions before trusting a post."
         },
         {
-          id: "m4",
-          type: "image",
-          title: "Golden Honey Dripping Hands",
-          url: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
-          trueType: "real",
-          description: "High-contrast close-up shot of liquid honey dripping between fingers, capturing natural skin pores and hair.",
-          anomalies: "No AI anomalies. Flawless human anatomy, realistic physics-based liquid viscosity, consistent focus plane, authentic light refraction through honey."
+          "id": "q19",
+          "type": "likert5Freq",
+          "text": "I use fact-checking websites or reverse image searches."
+        },
+        {
+          "id": "q20",
+          "type": "likert5Freq",
+          "text": "I verify information before reposting or sharing it."
         }
       ]
     },
     {
-      id: "section_f",
-      title: "SECTION F: AWARENESS & OPINION",
-      description: "General public awareness and ethical stance regarding AI-generated media",
-      questions: [
+      "id": "section_d",
+      "title": "SECTION D: AI-Generated Content Exposure",
+      "description": "Please answer the following regarding your exposure to AI-generated content.",
+      "questions": [
         {
-          id: "q28",
-          type: "radio",
-          text: "Have you heard the term “deepfake” before?",
-          options: ["Yes", "No"]
+          "id": "q21",
+          "type": "radio",
+          "text": "16. Have you previously heard about AI-generated images or videos?",
+          "options": [
+            "Yes",
+            "No"
+          ]
         },
         {
-          id: "q29",
-          type: "radio",
-          text: "Do you think AI-generated content is becoming more common online?",
-          options: ["Yes", "No", "Not sure"]
+          "id": "q22",
+          "type": "radio",
+          "text": "17. How often do you encounter AI-generated content on social media?",
+          "options": [
+            "Never",
+            "Rarely",
+            "Sometimes",
+            "Often",
+            "Very Often"
+          ]
         },
         {
-          id: "q30",
-          type: "radio",
-          text: "Do you think AI-generated content can mislead people?",
-          options: ["Yes", "No", "Maybe"]
-        },
-        {
-          id: "q31",
-          type: "radio",
-          text: "Do you think social media platforms should label AI-generated content?",
-          options: ["Yes", "No", "Not sure"]
-        },
-        {
-          id: "q32",
-          type: "radio",
-          text: "Do you trust images and videos shared on social media?",
-          options: ["Yes", "No", "Sometimes"]
-        },
-        {
-          id: "q33",
-          type: "radio",
-          text: "Do you think younger users are better at identifying fake AI content?",
-          options: ["Yes", "No", "Not sure"]
+          "id": "q23",
+          "type": "radio",
+          "text": "18. How confident are you in your ability to identify AI-generated images and videos?",
+          "options": [
+            "Very Low",
+            "Low",
+            "Moderate",
+            "High",
+            "Very High"
+          ]
         }
       ]
     },
     {
-      id: "section_g",
-      title: "SECTION G: OPTIONAL RESPONSE",
-      description: "Qualitative feedback on personal experiences with AI content",
-      questions: [
+      "id": "section_e",
+      "title": "SECTION E: Detection Test",
+      "description": "Look at each image/video shown and select your answer and confidence level.",
+      "isMediaSection": true,
+      "mediaItems": [
         {
-          id: "q34",
-          type: "textarea",
-          text: "Do you have any thoughts or experiences related to AI-generated content?",
-          placeholder: "Type your experiences, concerns, or feedback here..."
+          "id": "m1",
+          "type": "image",
+          "title": "Image 1",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
+          "trueType": "ai",
+          "description": "Image 1 Placeholder"
+        },
+        {
+          "id": "m2",
+          "type": "image",
+          "title": "Image 2",
+          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
+          "trueType": "real",
+          "description": "Image 2 Placeholder"
+        },
+        {
+          "id": "m3",
+          "type": "image",
+          "title": "Image 3",
+          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800",
+          "trueType": "ai",
+          "description": "Image 3 Placeholder"
+        },
+        {
+          "id": "m4",
+          "type": "image",
+          "title": "Image 4",
+          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
+          "trueType": "real",
+          "description": "Image 4 Placeholder"
+        },
+        {
+          "id": "m5",
+          "type": "image",
+          "title": "Image 5",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
+          "trueType": "ai",
+          "description": "Image 5 Placeholder"
+        },
+        {
+          "id": "v1",
+          "type": "video",
+          "title": "Video 1",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "ai",
+          "description": "Video 1 Placeholder"
+        },
+        {
+          "id": "v2",
+          "type": "video",
+          "title": "Video 2",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "real",
+          "description": "Video 2 Placeholder"
+        },
+        {
+          "id": "v3",
+          "type": "video",
+          "title": "Video 3",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "ai",
+          "description": "Video 3 Placeholder"
+        },
+        {
+          "id": "v4",
+          "type": "video",
+          "title": "Video 4",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "real",
+          "description": "Video 4 Placeholder"
+        },
+        {
+          "id": "v5",
+          "type": "video",
+          "title": "Video 5",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "ai",
+          "description": "Video 5 Placeholder"
         }
       ]
     }
@@ -503,39 +582,16 @@ app.post('/api/generate-mock', async (req, res) => {
   const responses = readJSON(RESPONSES_PATH, []);
   
   const mockResponses = [];
-  const ages = ["18–21", "22–25", "26–30", "31–40", "41+"];
-  const genders = ["Male", "Female", "Prefer not to say", "Other"];
-  const educations = ["School level", "Undergraduate", "Postgraduate", "Other"];
-  const fields = ["Arts/Humanities", "Commerce/Business", "Science", "Technology", "Media/Communication", "Other"];
-  
+  const ages = ["18–24", "25–34", "35–44", "45–54", "55+"];
+  const genders = ["Male", "Female", "Other", "Prefer not to say"];
+  const educations = ["Higher Secondary", "Diploma", "Undergraduate", "Postgraduate", "Other"];
   const platforms = ["Instagram", "Facebook", "Both equally"];
-  const times = ["Less than 1 hour", "1–2 hours", "3–4 hours", "More than 5 hours"];
-  const contents = ["Images", "Videos/Reels", "Text posts", "Mixed content"];
-  const shares = ["Rarely", "Sometimes", "Often", "Very often"];
-  const fakes = ["Yes", "No", "Not sure"];
-  
-  const confidenceOptions = ["Very unsure", "Unsure", "Neutral", "Sure", "Very sure"];
+  const times = ["Less than 1 hour", "1–2 hours", "3–4 hours", "5–6 hours", "More than 6 hours"];
+  const fakes = ["Yes", "No"];
+  const freqAI = ["Never", "Rarely", "Sometimes", "Often", "Very Often"];
+  const confAI = ["Very Low", "Low", "Moderate", "High", "Very High"];
+  const confidenceOptions = ["Very Uncertain", "Uncertain", "Neutral", "Confident", "Very Confident"];
   const helpOptions = ["Visual details", "Facial/body appearance", "Lighting/shadows", "Caption/context", "Guess", "Other"];
-  
-  const opinions = {
-    q28: ["Yes", "No"],
-    q29: ["Yes", "No", "Not sure"],
-    q30: ["Yes", "No", "Maybe"],
-    q31: ["Yes", "No", "Not sure"],
-    q32: ["Yes", "No", "Sometimes"],
-    q33: ["Yes", "No", "Not sure"]
-  };
-
-  const qualitativeThoughts = [
-    "I saw a deepfake video of a politician that looked extremely real. It's frightening how fast the technology is advancing.",
-    "As a designer, I can spot the weird blending in AI hands, but normal users will definitely fall for it.",
-    "My grandmother shares AI-generated photos of giant vegetables on Facebook thinking they are real. We need labeling ASAP.",
-    "AI is a great tool for creativity, but the lack of regulation on social media makes it highly dangerous for election campaigns.",
-    "I believe digital literacy is more important than platform censoring.",
-    "Sometimes I struggle to tell the difference, especially when viewing quickly on a mobile screen.",
-    "The lighting is usually the dead giveaway. AI shadows don't make physical sense yet.",
-    "It's getting harder every month. I used to be 100% sure, now I'm doubting real photos too."
-  ];
 
   const mockNames = [
     "Emily Watson", "Alex Carter", "David Chen", "Sofia Martinez", 
@@ -546,38 +602,30 @@ app.post('/api/generate-mock', async (req, res) => {
   ];
 
   for (let i = 0; i < count; i++) {
-    // Determine profile: Let's create profiles to build logical correlation
-    // Profile 1: Tech-savvy youth (18-25, Tech/Science, High media literacy, High tech adoption, high AI detection)
-    // Profile 2: Older non-tech (41+, Arts/Business, Low media literacy, Low tech adoption, low AI detection)
-    // Profile 3: Average user
-    
     const randomVal = Math.random();
     let profile = "average";
-    let age, gender, edu, field, literacyBias, techBias, accuracyBias;
+    let age, gender, edu, literacyBias, techBias, accuracyBias;
     
     gender = genders[Math.floor(Math.random() * genders.length)];
     
     if (randomVal < 0.35) {
       profile = "tech-savvy-youth";
-      age = ages[Math.floor(Math.random() * 2)]; // 18-21 or 22-25
+      age = ages[Math.floor(Math.random() * 2)]; // 18-24 or 25-34
       edu = Math.random() > 0.3 ? "Undergraduate" : "Postgraduate";
-      field = Math.random() > 0.5 ? "Technology" : "Science";
-      literacyBias = 4.2; // Tends to score high on media literacy (agree/strongly agree)
-      techBias = 4.4;     // Tends to score high on technology adoption
-      accuracyBias = 0.85; // 85% chance of correctly identifying AI vs Real
+      literacyBias = 4.2; 
+      techBias = 4.4;     
+      accuracyBias = 0.85; 
     } else if (randomVal < 0.60) {
       profile = "older-traditional";
-      age = ages[3 + Math.floor(Math.random() * 2)]; // 31-40 or 41+
-      edu = Math.random() > 0.6 ? "School level" : "Undergraduate";
-      field = fields[Math.floor(Math.random() * 3)]; // Arts, Commerce, Other
-      literacyBias = 2.6; // Low-to-moderate literacy
-      techBias = 2.1;     // Low tech adoption
-      accuracyBias = 0.40; // 40% chance of correct (worse than random guessing sometimes!)
+      age = ages[3 + Math.floor(Math.random() * 2)]; // 45-54 or 55+
+      edu = Math.random() > 0.6 ? "Higher Secondary" : "Undergraduate";
+      literacyBias = 2.6; 
+      techBias = 2.1;     
+      accuracyBias = 0.40; 
     } else {
       profile = "average";
       age = ages[Math.floor(Math.random() * ages.length)];
       edu = educations[Math.floor(Math.random() * educations.length)];
-      field = fields[Math.floor(Math.random() * fields.length)];
       literacyBias = 3.5;
       techBias = 3.3;
       accuracyBias = 0.65;
@@ -587,38 +635,30 @@ app.post('/api/generate-mock', async (req, res) => {
     answers.participant_name = mockNames[i % mockNames.length] + ` (Mock #${i+1})`;
     
     // Section A Answers
-    answers.q1 = age;
-    answers.q2 = gender;
+    answers.q1 = gender;
+    answers.q2 = age;
     answers.q3 = edu;
-    answers.q4 = field;
+    answers.q4 = platforms[Math.floor(Math.random() * platforms.length)];
+    answers.q5 = times[Math.floor(Math.random() * times.length)];
     
-    // Section B Answers
-    answers.q5 = platforms[Math.floor(Math.random() * platforms.length)];
-    answers.q6 = times[Math.floor(Math.random() * times.length)];
-    answers.q7 = contents[Math.floor(Math.random() * contents.length)];
-    answers.q8 = shares[Math.floor(Math.random() * shares.length)];
-    answers.q9 = profile === "tech-savvy-youth" ? "Yes" : fakes[Math.floor(Math.random() * fakes.length)];
-    answers.q10 = Math.random() > 0.4 ? "Yes" : "No";
-    
-    // Section C Answers (Literacy Scale: 8 items q11 to q18)
-    for (let q = 11; q <= 18; q++) {
+    // Section B Answers (Digital Media Literacy: q6 to q15)
+    for (let q = 6; q <= 15; q++) {
       let score = Math.round(literacyBias + (Math.random() * 2 - 1));
       score = Math.max(1, Math.min(5, score));
       answers[`q${q}`] = score;
     }
     
-    // Section D Answers (Tech Adoption Scale: 6 items q19 to q24)
-    for (let q = 19; q <= 24; q++) {
-      let score;
-      if (q === 23 || q === 24) {
-        // Reverse coded: Low tech adoption profile will agree (higher score), tech-savvy will disagree (lower score)
-        score = Math.round((6 - techBias) + (Math.random() * 2 - 1));
-      } else {
-        score = Math.round(techBias + (Math.random() * 2 - 1));
-      }
+    // Section C Answers (Verification Behaviour: q16 to q20)
+    for (let q = 16; q <= 20; q++) {
+      let score = Math.round(techBias + (Math.random() * 2 - 1));
       score = Math.max(1, Math.min(5, score));
       answers[`q${q}`] = score;
     }
+    
+    // Section D Answers (Exposure: q21 to q23)
+    answers.q21 = profile === "tech-savvy-youth" ? "Yes" : fakes[Math.floor(Math.random() * fakes.length)];
+    answers.q22 = freqAI[Math.floor(Math.random() * freqAI.length)];
+    answers.q23 = confAI[Math.floor(Math.random() * confAI.length)];
     
     // Section E Answers (Media AI Detection)
     const mediaSection = config.sections.find(s => s.isMediaSection);
@@ -628,7 +668,6 @@ app.post('/api/generate-mock', async (req, res) => {
         const answer = isCorrect ? item.trueType : (item.trueType === "real" ? "ai" : "real");
         answers[item.id] = answer;
         
-        // Confidence score
         let confIdx;
         if (isCorrect) {
           confIdx = profile === "tech-savvy-youth" ? (3 + Math.floor(Math.random() * 2)) : (2 + Math.floor(Math.random() * 3));
@@ -638,7 +677,6 @@ app.post('/api/generate-mock', async (req, res) => {
         confIdx = Math.max(0, Math.min(4, confIdx));
         answers[`${item.id}_confidence`] = confidenceOptions[confIdx];
         
-        // What helped
         const selectedHelped = [];
         const helpCount = 1 + Math.floor(Math.random() * 2);
         for (let h = 0; h < helpCount; h++) {
@@ -649,22 +687,6 @@ app.post('/api/generate-mock', async (req, res) => {
         }
         answers[`${item.id}_helped`] = selectedHelped;
       });
-    }
-    
-    // Section F Answers
-    Object.keys(opinions).forEach(qKey => {
-      let opts = opinions[qKey];
-      let ans;
-      if (qKey === "q28" && profile === "tech-savvy-youth") ans = "Yes";
-      else ans = opts[Math.floor(Math.random() * opts.length)];
-      answers[qKey] = ans;
-    });
-    
-    // Section G Optional Answer
-    if (Math.random() > 0.7) {
-      answers.q34 = qualitativeThoughts[Math.floor(Math.random() * qualitativeThoughts.length)];
-    } else {
-      answers.q34 = "";
     }
     
     mockResponses.push({

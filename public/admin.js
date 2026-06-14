@@ -3,213 +3,292 @@
 // Base API configuration and hybrid routing
 const FIREBASE_DB_URL = 'https://research-344f8-default-rtdb.asia-southeast1.firebasedatabase.app';
 const USE_CLOUD_STORAGE = false; // CRITICAL FIX: Always route through Vercel backend (server.js) for security
-const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:3000' : '';
+const API_BASE = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'http://localhost:3000' : '';
 
 // State
 const defaultSurveyConfig = {
-  title: "Detection of AI-Generated Images and Videos on Social Media",
-  description: "Academic Research Survey in Journalism and Mass Communication",
-  consentText: "Hello,\nThis survey is conducted as part of an academic research study in Journalism and Mass Communication. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
-  sections: [
+  "title": "Academic Survey: AI-Generated Content Detection on Social Media",
+  "description": "Academic Research Study",
+  "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+  "sections": [
     {
-      id: "section_a",
-      title: "SECTION A: BASIC INFORMATION",
-      description: "Demographic profile of the participant",
-      questions: [
+      "id": "section_a",
+      "title": "SECTION A: Demographic Information",
+      "description": "Please provide your demographic details.",
+      "questions": [
         {
-          id: "q1",
-          type: "radio",
-          text: "What is your age?",
-          options: ["18–21", "22–25", "26–30", "31–40", "41+"]
+          "id": "q1",
+          "type": "radio",
+          "text": "1. Gender",
+          "options": [
+            "Male",
+            "Female",
+            "Other",
+            "Prefer not to say"
+          ]
         },
         {
-          id: "q2",
-          type: "radio",
-          text: "What is your gender?",
-          options: ["Male", "Female", "Prefer not to say", "Other"]
+          "id": "q2",
+          "type": "radio",
+          "text": "2. Age",
+          "options": [
+            "18–24",
+            "25–34",
+            "35–44",
+            "45–54",
+            "55+"
+          ]
         },
         {
-          id: "q3",
-          type: "radio",
-          text: "What is your highest educational qualification?",
-          options: ["School level", "Undergraduate", "Postgraduate", "Other"]
+          "id": "q3",
+          "type": "radio",
+          "text": "3. Educational Qualification",
+          "options": [
+            "Higher Secondary",
+            "Diploma",
+            "Undergraduate",
+            "Postgraduate",
+            "Other"
+          ]
         },
         {
-          id: "q4",
-          type: "radio",
-          text: "What is your field of study/work?",
-          options: ["Arts/Humanities", "Commerce/Business", "Science", "Technology", "Media/Communication", "Other"]
+          "id": "q4",
+          "type": "radio",
+          "text": "4. Which platform do you use most frequently?",
+          "options": [
+            "Instagram",
+            "Facebook",
+            "Both equally"
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "radio",
+          "text": "5. Average daily social media use",
+          "options": [
+            "Less than 1 hour",
+            "1–2 hours",
+            "3–4 hours",
+            "5–6 hours",
+            "More than 6 hours"
+          ]
         }
       ]
     },
     {
-      id: "section_b",
-      title: "SECTION B: SOCIAL MEDIA USAGE",
-      description: "Habits and consumption of social media content",
-      questions: [
+      "id": "section_b",
+      "title": "SECTION B: Digital Media Literacy",
+      "description": "Indicate your level of agreement. (1 = Strongly Disagree, 5 = Strongly Agree)",
+      "questions": [
         {
-          id: "q5",
-          type: "radio",
-          text: "Which social media platform do you use most frequently?",
-          options: ["Instagram", "Facebook", "Both equally"]
+          "id": "q6",
+          "type": "likert5",
+          "text": "Information Evaluation: I verify information before sharing it online."
         },
         {
-          id: "q6",
-          type: "radio",
-          text: "How much time do you spend daily on social media?",
-          options: ["Less than 1 hour", "1–2 hours", "3–4 hours", "More than 5 hours"]
+          "id": "q7",
+          "type": "likert5",
+          "text": "Information Evaluation: I compare information from multiple sources before believing it."
         },
         {
-          id: "q7",
-          type: "radio",
-          text: "What type of content do you mostly consume?",
-          options: ["Images", "Videos/Reels", "Text posts", "Mixed content"]
+          "id": "q8",
+          "type": "likert5",
+          "text": "Information Evaluation: I can identify unreliable online information."
         },
         {
-          id: "q8",
-          type: "radio",
-          text: "How often do you share social media posts?",
-          options: ["Rarely", "Sometimes", "Often", "Very often"]
+          "id": "q9",
+          "type": "likert5",
+          "text": "Information Evaluation: I pay attention to the source of information before trusting it."
         },
         {
-          id: "q9",
-          type: "radio",
-          text: "Have you ever seen content online that looked fake or edited?",
-          options: ["Yes", "No", "Not sure"]
+          "id": "q10",
+          "type": "likert5",
+          "text": "Platform Awareness: I understand that social media algorithms influence the content I see."
         },
         {
-          id: "q10",
-          type: "radio",
-          text: "Do you follow news or information pages/accounts on social media?",
-          options: ["Yes", "No"]
+          "id": "q11",
+          "type": "likert5",
+          "text": "Platform Awareness: I am aware that AI can generate realistic images and videos."
+        },
+        {
+          "id": "q12",
+          "type": "likert5",
+          "text": "Platform Awareness: I understand that visual content on social media may be manipulated."
+        },
+        {
+          "id": "q13",
+          "type": "likert5",
+          "text": "Critical Thinking: I question information that seems sensational or emotionally provocative."
+        },
+        {
+          "id": "q14",
+          "type": "likert5",
+          "text": "Critical Thinking: I look for evidence before accepting online claims."
+        },
+        {
+          "id": "q15",
+          "type": "likert5",
+          "text": "Critical Thinking: I critically evaluate visual content before believing it."
         }
       ]
     },
     {
-      id: "section_c",
-      title: "SECTION C: DIGITAL MEDIA LITERACY",
-      description: "Please indicate how much you agree with the following statements. (1 = Strongly Disagree, 5 = Strongly Agree)",
-      questions: [
-        { id: "q11", type: "likert5", text: "I verify information before sharing it online." },
-        { id: "q12", type: "likert5", text: "I check multiple sources before believing information online." },
-        { id: "q13", type: "likert5", text: "I can identify misleading or fake content online." },
-        { id: "q14", type: "likert5", text: "I pay attention to details in images and videos." },
-        { id: "q15", type: "likert5", text: "I question the authenticity of viral content." },
-        { id: "q16", type: "likert5", text: "I am aware that AI can create realistic fake images and videos." },
-        { id: "q17", type: "likert5", text: "I try to identify whether online content is real or manipulated." },
-        { id: "q18", type: "likert5", text: "I use fact-checking methods or websites when I doubt content." }
-      ]
-    },
-    {
-      id: "section_d",
-      title: "SECTION D: TECHNOLOGY ADOPTION (DOI)",
-      description: "Diffusion of Innovations technology adoption profiling. (1 = Strongly Disagree, 5 = Strongly Agree)",
-      questions: [
-        { id: "q19", type: "likert5", text: "I like trying new technologies before others." },
-        { id: "q20", type: "likert5", text: "I enjoy exploring new digital tools and apps." },
-        { id: "q21", type: "likert5", text: "I usually adopt new technologies quickly." },
-        { id: "q22", type: "likert5", text: "I feel comfortable learning new technologies on my own." },
-        { id: "q23", type: "likert5", text: "I prefer to wait before using new technologies. (Reverse coded)", isReverse: true },
-        { id: "q24", type: "likert5", text: "I depend on others to explain new technologies to me. (Reverse coded)", isReverse: true }
-      ]
-    },
-    {
-      id: "section_e",
-      title: "SECTION E: AI-GENERATED CONTENT DETECTION",
-      description: "Analyze the following media files and determine if they are real or AI-generated.",
-      isMediaSection: true,
-      mediaItems: [
+      "id": "section_c",
+      "title": "SECTION C: Verification Behaviour",
+      "description": "Frequency Scale (1 = Never, 5 = Always)",
+      "questions": [
         {
-          id: "m1",
-          type: "image",
-          title: "Astronaut in Lavender Mars Field",
-          url: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
-          trueType: "ai",
-          description: "Photorealistic depiction of an astronaut picking purple lavender under a bright orange Martian sky.",
-          anomalies: "Symmetry errors in the backpack straps, surreal light source reflecting on the helmet visor showing trees, physics-defying lavender stems."
+          "id": "q16",
+          "type": "likert5Freq",
+          "text": "I check the original source of a post."
         },
         {
-          id: "m2",
-          type: "image",
-          title: "Tokyo Market Stall Vendor",
-          url: "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
-          trueType: "real",
-          description: "Stunning street photography of a vendor smiling behind his seafood stall at Tsukiji Market, Tokyo.",
-          anomalies: "No AI anomalies. Perfect reflections on wet floor, clear and legible price tags in Japanese kanji, anatomically correct hands holding ice scoop."
+          "id": "q17",
+          "type": "likert5Freq",
+          "text": "I search online to verify suspicious images."
         },
         {
-          id: "m3",
-          type: "image",
-          title: "The Floating Island Turtle",
-          url: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800",
-          trueType: "ai",
-          description: "A giant sea turtle swimming in deep blue ocean waters with an entire tropical forest growing on its shell.",
-          anomalies: "Surreal biological fusion, blending textures between turtle shell and fertile soil, impossible lighting patterns deep underwater."
+          "id": "q18",
+          "type": "likert5Freq",
+          "text": "I read comments or discussions before trusting a post."
         },
         {
-          id: "m4",
-          type: "image",
-          title: "Golden Honey Dripping Hands",
-          url: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
-          trueType: "real",
-          description: "High-contrast close-up shot of liquid honey dripping between fingers, capturing natural skin pores and hair.",
-          anomalies: "No AI anomalies. Flawless human anatomy, realistic physics-based liquid viscosity, consistent focus plane, authentic light refraction through honey."
+          "id": "q19",
+          "type": "likert5Freq",
+          "text": "I use fact-checking websites or reverse image searches."
+        },
+        {
+          "id": "q20",
+          "type": "likert5Freq",
+          "text": "I verify information before reposting or sharing it."
         }
       ]
     },
     {
-      id: "section_f",
-      title: "SECTION F: AWARENESS & OPINION",
-      description: "General public awareness and ethical stance regarding AI-generated media",
-      questions: [
+      "id": "section_d",
+      "title": "SECTION D: AI-Generated Content Exposure",
+      "description": "Please answer the following regarding your exposure to AI-generated content.",
+      "questions": [
         {
-          id: "q28",
-          type: "radio",
-          text: "Have you heard the term “deepfake” before?",
-          options: ["Yes", "No"]
+          "id": "q21",
+          "type": "radio",
+          "text": "16. Have you previously heard about AI-generated images or videos?",
+          "options": [
+            "Yes",
+            "No"
+          ]
         },
         {
-          id: "q29",
-          type: "radio",
-          text: "Do you think AI-generated content is becoming more common online?",
-          options: ["Yes", "No", "Not sure"]
+          "id": "q22",
+          "type": "radio",
+          "text": "17. How often do you encounter AI-generated content on social media?",
+          "options": [
+            "Never",
+            "Rarely",
+            "Sometimes",
+            "Often",
+            "Very Often"
+          ]
         },
         {
-          id: "q30",
-          type: "radio",
-          text: "Do you think AI-generated content can mislead people?",
-          options: ["Yes", "No", "Maybe"]
-        },
-        {
-          id: "q31",
-          type: "radio",
-          text: "Do you think social media platforms should label AI-generated content?",
-          options: ["Yes", "No", "Not sure"]
-        },
-        {
-          id: "q32",
-          type: "radio",
-          text: "Do you trust images and videos shared on social media?",
-          options: ["Yes", "No", "Sometimes"]
-        },
-        {
-          id: "q33",
-          type: "radio",
-          text: "Do you think younger users are better at identifying fake AI content?",
-          options: ["Yes", "No", "Not sure"]
+          "id": "q23",
+          "type": "radio",
+          "text": "18. How confident are you in your ability to identify AI-generated images and videos?",
+          "options": [
+            "Very Low",
+            "Low",
+            "Moderate",
+            "High",
+            "Very High"
+          ]
         }
       ]
     },
     {
-      id: "section_g",
-      title: "SECTION G: OPTIONAL RESPONSE",
-      description: "Qualitative feedback on personal experiences with AI content",
-      questions: [
+      "id": "section_e",
+      "title": "SECTION E: Detection Test",
+      "description": "Look at each image/video shown and select your answer and confidence level.",
+      "isMediaSection": true,
+      "mediaItems": [
         {
-          id: "q34",
-          type: "textarea",
-          text: "Do you have any thoughts or experiences related to AI-generated content?",
-          placeholder: "Type your experiences, concerns, or feedback here..."
+          "id": "m1",
+          "type": "image",
+          "title": "Image 1",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
+          "trueType": "ai",
+          "description": "Image 1 Placeholder"
+        },
+        {
+          "id": "m2",
+          "type": "image",
+          "title": "Image 2",
+          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
+          "trueType": "real",
+          "description": "Image 2 Placeholder"
+        },
+        {
+          "id": "m3",
+          "type": "image",
+          "title": "Image 3",
+          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800",
+          "trueType": "ai",
+          "description": "Image 3 Placeholder"
+        },
+        {
+          "id": "m4",
+          "type": "image",
+          "title": "Image 4",
+          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
+          "trueType": "real",
+          "description": "Image 4 Placeholder"
+        },
+        {
+          "id": "m5",
+          "type": "image",
+          "title": "Image 5",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
+          "trueType": "ai",
+          "description": "Image 5 Placeholder"
+        },
+        {
+          "id": "v1",
+          "type": "video",
+          "title": "Video 1",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "ai",
+          "description": "Video 1 Placeholder"
+        },
+        {
+          "id": "v2",
+          "type": "video",
+          "title": "Video 2",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "real",
+          "description": "Video 2 Placeholder"
+        },
+        {
+          "id": "v3",
+          "type": "video",
+          "title": "Video 3",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "ai",
+          "description": "Video 3 Placeholder"
+        },
+        {
+          "id": "v4",
+          "type": "video",
+          "title": "Video 4",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "real",
+          "description": "Video 4 Placeholder"
+        },
+        {
+          "id": "v5",
+          "type": "video",
+          "title": "Video 5",
+          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "trueType": "ai",
+          "description": "Video 5 Placeholder"
         }
       ]
     }
@@ -395,7 +474,7 @@ function updateExecutiveMetrics() {
     // Literacy Score Averages (Q11-Q18)
     let litSum = 0;
     let litCount = 0;
-    for (let i = 11; i <= 18; i++) {
+    for (let i = 6; i <= 15; i++) {
       if (answers[`q${i}`] !== undefined) {
         litSum += parseInt(answers[`q${i}`]);
         litCount++;
@@ -406,11 +485,10 @@ function updateExecutiveMetrics() {
     // Tech Adoption Averages (Q19-Q24)
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let i = 19; i <= 24; i++) {
+    for (let i = 16; i <= 20; i++) {
       if (answers[`q${i}`] !== undefined) {
         let val = parseInt(answers[`q${i}`]);
-        if (i === 23 || i === 24) val = 6 - val; // Reverse Coded correction
-        adoptSum += val;
+                adoptSum += val;
         adoptCount++;
       }
     }
@@ -1200,7 +1278,7 @@ function runDescriptiveStatistics() {
     
     // Literacy
     let lCount = 0, lRow = 0;
-    for (let q = 11; q <= 18; q++) {
+    for (let q = 6; q <= 15; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) { lRow += score; lCount++; }
     }
@@ -1210,11 +1288,10 @@ function runDescriptiveStatistics() {
     
     // Adoption
     let aCount = 0, aRow = 0;
-    for (let q = 19; q <= 24; q++) {
+    for (let q = 16; q <= 20; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) {
-        if (q === 23 || q === 24) score = 6 - score;
-        aRow += score; 
+                aRow += score; 
         aCount++;
       }
     }
@@ -1594,18 +1671,17 @@ window.runMultipleRegressionAnalysis = function() {
     Y.push(mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0);
     
     let litSum = 0, litCount = 0;
-    for (let q = 11; q <= 18; q++) {
+    for (let q = 6; q <= 15; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) { litSum += score; litCount++; }
     }
     X1.push(litCount > 0 ? litSum / litCount : 3.0);
     
     let adoptSum = 0, adoptCount = 0;
-    for (let q = 19; q <= 24; q++) {
+    for (let q = 16; q <= 20; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) {
-        if (q === 23 || q === 24) score = 6 - score;
-        adoptSum += score; 
+                adoptSum += score; 
         adoptCount++;
       }
     }
@@ -1996,7 +2072,7 @@ function renderCorrelationScatter() {
     // 1. Score Literacy (q11 - q18)
     let litSum = 0;
     let litCount = 0;
-    for (let q = 11; q <= 18; q++) {
+    for (let q = 6; q <= 15; q++) {
       if (answers[`q${q}`] !== undefined) {
         litSum += parseInt(answers[`q${q}`]);
         litCount++;
@@ -2135,11 +2211,10 @@ function renderDoiBellCurve() {
     const answers = resp.answers;
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let q = 19; q <= 24; q++) {
+    for (let q = 16; q <= 20; q++) {
       if (answers[`q${q}`] !== undefined) {
         let val = parseInt(answers[`q${q}`]);
-        if (q === 23 || q === 24) val = 6 - val; // Reverse Coded
-        adoptSum += val;
+                adoptSum += val;
         adoptCount++;
       }
     }
@@ -2248,7 +2323,7 @@ function renderResponsesTable() {
     // Media Literacy Sum
     let litSum = 0;
     let litCount = 0;
-    for (let q = 11; q <= 18; q++) {
+    for (let q = 6; q <= 15; q++) {
       if (resp.answers[`q${q}`] !== undefined) {
         litSum += parseInt(resp.answers[`q${q}`]);
         litCount++;
@@ -2259,11 +2334,10 @@ function renderResponsesTable() {
     // Tech Adoption Sum
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let q = 19; q <= 24; q++) {
+    for (let q = 16; q <= 20; q++) {
       if (resp.answers[`q${q}`] !== undefined) {
         let val = parseInt(resp.answers[`q${q}`]);
-        if (q === 23 || q === 24) val = 6 - val; // Reverse Coded
-        adoptSum += val;
+                adoptSum += val;
         adoptCount++;
       }
     }
@@ -2433,11 +2507,11 @@ btnExportCSV.addEventListener('click', () => {
   const headers = ['RespondentID', 'Timestamp', 'A1_Age', 'A2_Gender', 'A3_Education', 'A4_Field', 'B5_Platform', 'B6_TimeSpend', 'B7_Content', 'B8_Sharing', 'B9_SeenFake', 'B10_FollowNews'];
   
   // Section C scales q11 to q18
-  for (let i = 11; i <= 18; i++) headers.push(`C${i}_Literacy`);
+  for (let i = 6; i <= 15; i++) headers.push(`B${i}_Literacy`);
   headers.push('Literacy_Scale_Mean');
   
   // Section D scales q19 to q24
-  for (let i = 19; i <= 24; i++) headers.push(`D${i}_TechAdopt`);
+  for (let i = 16; i <= 20; i++) headers.push(`C${i}_Verification`);
   headers.push('Tech_Adoption_Scale_Mean');
   
   // Section E media assets
@@ -2484,7 +2558,7 @@ btnExportCSV.addEventListener('click', () => {
     // C Literacy Sum & mean
     let litSum = 0;
     let litCount = 0;
-    for (let i = 11; i <= 18; i++) {
+    for (let i = 6; i <= 15; i++) {
       const val = answers[`q${i}`];
       row.push(val || '');
       if (val !== undefined) {
@@ -2497,13 +2571,12 @@ btnExportCSV.addEventListener('click', () => {
     // D Tech adoption sum & mean (handling reverse coding values for q23,q24 output averages)
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let i = 19; i <= 24; i++) {
+    for (let i = 16; i <= 20; i++) {
       const val = answers[`q${i}`];
       row.push(val || '');
       if (val !== undefined) {
         let score = parseInt(val);
-        if (i === 23 || i === 24) score = 6 - score; // Reverse
-        adoptSum += score;
+                adoptSum += score;
         adoptCount++;
       }
     }
@@ -2560,7 +2633,7 @@ btnGenerateMock.addEventListener('click', async () => {
     if (USE_CLOUD_STORAGE) {
       // 100% Serverless client-side generation loop
       const genders = ["Male", "Female", "Prefer not to say", "Other"];
-      const ages = ["18–21", "22–25", "26–30", "31–40", "41+"];
+      const ages = ["18–24", "25–34", "35–44", "45–54", "55+"];
       const educations = ["School level", "Undergraduate", "Postgraduate", "Other"];
       const fields = ["Arts/Humanities", "Commerce/Business", "Science", "Technology", "Media/Communication", "Other"];
       const platforms = ["Instagram", "Facebook", "Both equally"];
@@ -2647,19 +2720,15 @@ btnGenerateMock.addEventListener('click', async () => {
         answers.q9 = profile === "tech-savvy-youth" ? "Yes" : fakes[Math.floor(Math.random() * fakes.length)];
         answers.q10 = Math.random() > 0.4 ? "Yes" : "No";
         
-        for (let q = 11; q <= 18; q++) {
+        for (let q = 6; q <= 15; q++) {
           let score = Math.round(literacyBias + (Math.random() * 2 - 1));
           score = Math.max(1, Math.min(5, score));
           answers[`q${q}`] = score;
         }
         
-        for (let q = 19; q <= 24; q++) {
+        for (let q = 16; q <= 20; q++) {
           let score;
-          if (q === 23 || q === 24) {
-            score = Math.round((6 - techBias) + (Math.random() * 2 - 1));
-          } else {
-            score = Math.round(techBias + (Math.random() * 2 - 1));
-          }
+          score = Math.round(techBias + (Math.random() * 2 - 1));
           score = Math.max(1, Math.min(5, score));
           answers[`q${q}`] = score;
         }

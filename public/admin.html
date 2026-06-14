@@ -100,7 +100,7 @@
             <div class="stat-icon"><i class="fa-solid fa-microchip"></i></div>
             <div class="stat-info">
               <span class="stat-value" id="stat-avg-adoption">0.0/5</span>
-              <span class="stat-label">Avg. Tech Adoption</span>
+              <span class="stat-label">Avg. Verif. Behaviour</span>
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@
             <i class="fa-solid fa-lightbulb" style="color: var(--warning);"></i> Preliminary Thesis Insights
           </h3>
           <p id="dashboard-insight-text" style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8;">
-            Please load or generate survey data to observe research findings. In general, this dissertation investigates the theoretical linkages between a participant's self-assessed digital media literacy, their technology adoption category (Rogers' DOI), and their empirical ability to identify AI-generated artifacts under pressure.
+            Please load or generate survey data to observe research findings. In general, this dissertation investigates the theoretical linkages between a participant's self-assessed digital media literacy, their verification behaviour, and their empirical ability to identify AI-generated artifacts under pressure.
           </p>
         </div>
       </section>
@@ -293,8 +293,8 @@
             </div>
             <div class="reliability-desc">
               <span class="reliability-status status-good" id="alpha-status-adoption">Awaiting data...</span>
-              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Technology Adoption Profile (Section D: Q19 - Q24)</h3>
-              <p style="font-size: 0.9rem;" id="alpha-desc-adoption">This scale comprises 6 Likert items measuring technology exploration enthusiasm, self-directed learning comfort, and reliance, including 2 reverse-coded items.</p>
+              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Verification Behaviour Profile (Section C: Q16 - Q20)</h3>
+              <p style="font-size: 0.9rem;" id="alpha-desc-adoption">This scale comprises 5 Likert-type items measuring the frequency of fact-checking behaviors such as verifying sources and checking comments.</p>
             </div>
           </div>
           
@@ -343,10 +343,10 @@
         <div class="card">
           <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px;">
             <i class="fa-solid fa-chart-line" style="color: var(--secondary); margin-right: 8px;"></i>
-            One-Way Analysis of Variance (ANOVA)
+            Independent Samples T-Test & ANOVA
           </h2>
           <div class="academic-explanation">
-            <strong>What is One-Way ANOVA?</strong> It compares the mean AI Detection Accuracy scores across different demographic groups to determine if at least one group performs significantly differently. An $F$-ratio with a $p < 0.05$ proves a statistically significant demographic difference!
+            <strong>What is T-Test / ANOVA?</strong> It compares the mean AI Detection Accuracy scores across different demographic groups to determine if at least one group performs significantly differently. An $F$-ratio with a $p < 0.05$ proves a statistically significant demographic difference!
           </div>
           
           <div class="form-group flex align-center gap-4" style="margin-bottom: 25px;">
@@ -460,7 +460,7 @@
             Multiple Linear Regression Model
           </h2>
           <div class="academic-explanation">
-            <strong>What is Multiple Linear Regression?</strong> It predicts a respondent's empirical AI Detection Accuracy ($Y$) based on two continuous predictors: their Digital Media Literacy Score ($X_1$) and their Technology Adoption Score ($X_2$). The formula modeled is: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2$$
+            <strong>What is Multiple Linear Regression?</strong> It predicts a respondent's empirical AI Detection Accuracy ($Y$) based on two continuous predictors: their Digital Media Literacy Score ($X_1$) and their Verification Behaviour Score ($X_2$). The formula modeled is: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2$$
           </div>
           
           <!-- Regression Coefficients Table -->
@@ -507,7 +507,7 @@
             </div>
             <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
               <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);" id="reg-vif-adopt">0.00</div>
-              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">VIF (Adoption)</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">VIF (Verification)</div>
             </div>
             <div style="background: rgba(255,255,255,0.01); border: 1px solid var(--border-color); padding: 15px; border-radius: var(--radius-md); text-align: center;">
               <div style="font-size: 1.5rem; font-weight: 700; color: var(--secondary);" id="reg-jarque-bera">p = 0.000</div>
@@ -529,7 +529,7 @@
                 <h4 style="font-family: var(--font-heading); margin-bottom: 8px;">Variance Inflation Factor (VIF)</h4>
                 <table style="width: 100%; font-size: 0.9rem; text-align: left; margin-bottom: 8px;">
                   <tr><td>Literacy Score:</td><td style="font-weight:700;" id="reg-vif-lit">0.00</td></tr>
-                  <tr><td>Adoption Score:</td><td style="font-weight:700;" id="reg-vif-adopt">0.00</td></tr>
+                  <tr><td>Verification Score:</td><td style="font-weight:700;" id="reg-vif-adopt">0.00</td></tr>
                 </table>
                 <div style="font-size: 0.85rem; color: var(--text-secondary);" id="reg-vif-interp">No multicollinearity.</div>
               </div>
@@ -571,8 +571,8 @@
           <div class="chart-card">
             <div class="chart-card-header">
               <div>
-                <h3 class="chart-card-title">Rogers' Diffusion of Innovations (DOI) Curve</h3>
-                <span class="chart-card-subtitle">Distribution of technology adoption categories based on Section D</span>
+                <h3 class="chart-card-title">Verification Behaviour Distribution</h3>
+                <span class="chart-card-subtitle">Distribution of verification behaviour scores based on Section C</span>
               </div>
             </div>
             <div class="chart-wrapper" style="height: 380px;">
@@ -622,7 +622,7 @@
                   <th>Gender</th>
                   <th>Education</th>
                   <th>Media Literacy</th>
-                  <th>Tech Adoption</th>
+                  <th>Verification Behav.</th>
                   <th>AI Detection Rate</th>
                   <th style="text-align: right;">Action</th>
                 </tr>
