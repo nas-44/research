@@ -46,6 +46,9 @@
       <button class="sidebar-tab" data-tab="tab-database">
         <i class="fa-solid fa-database"></i> Response Database
       </button>
+      <button class="sidebar-tab" data-tab="tab-visual-charts">
+        <i class="fa-solid fa-chart-bar"></i> Visual Question Charts
+      </button>
       
       <hr style="border:0; border-top: 1px solid var(--border-color); margin: 20px 0;">
       
@@ -168,6 +171,22 @@
             <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;">Consent Agreement Text</label>
             <textarea class="text-input" id="builder-survey-consent" style="min-height: 120px;"></textarea>
           </div>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;"><i class="fa-solid fa-image" style="color: var(--secondary);"></i> Condition 1: Image + AI-Generated (Fake Image Cues)</label>
+            <textarea class="text-input" id="builder-ai-image-clues" style="min-height: 100px; font-family: monospace; font-size: 0.85rem;" placeholder="Anatomy errors..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;"><i class="fa-solid fa-video" style="color: var(--secondary);"></i> Condition 2: Video + AI-Generated (Deepfake Video Cues)</label>
+            <textarea class="text-input" id="builder-ai-video-clues" style="min-height: 100px; font-family: monospace; font-size: 0.85rem;" placeholder="Lip-sync mismatch..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;"><i class="fa-solid fa-image" style="color: var(--primary);"></i> Condition 3: Image + Authentic (Real Image Cues)</label>
+            <textarea class="text-input" id="builder-authentic-image-clues" style="min-height: 100px; font-family: monospace; font-size: 0.85rem;" placeholder="Natural textures..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="question-text" style="font-size: 1rem; margin-bottom: 8px;"><i class="fa-solid fa-video" style="color: var(--primary);"></i> Condition 4: Video + Authentic (Real Video Cues)</label>
+            <textarea class="text-input" id="builder-authentic-video-clues" style="min-height: 100px; font-family: monospace; font-size: 0.85rem;" placeholder="Natural human movements..."></textarea>
+          </div>
           <div style="display: flex; justify-content: flex-end;">
             <button class="btn btn-primary" id="btn-save-builder-meta">
               <i class="fa-solid fa-floppy-disk"></i> Save Settings
@@ -280,8 +299,8 @@
             </div>
             <div class="reliability-desc">
               <span class="reliability-status status-excellent" id="alpha-status-literacy">Awaiting data...</span>
-              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Digital Media Literacy Scale (Section C: Q11 - Q18)</h3>
-              <p style="font-size: 0.9rem;" id="alpha-desc-literacy">This scale comprises 8 Likert items assessing self-reported confirmation bias, resource auditing, visual attentiveness, and awareness of generative AI techniques.</p>
+              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Digital Media Literacy Scale (Q10 - Q12)</h3>
+              <p style="font-size: 0.9rem;" id="alpha-desc-literacy">This scale comprises 3 Likert items (Q10-Q12) assessing the participant's Media Literacy Score (Max 15)., resource auditing, visual attentiveness, and awareness of generative AI techniques.</p>
             </div>
           </div>
 
@@ -293,8 +312,8 @@
             </div>
             <div class="reliability-desc">
               <span class="reliability-status status-good" id="alpha-status-adoption">Awaiting data...</span>
-              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Verification Behaviour Profile (Section C: Q16 - Q20)</h3>
-              <p style="font-size: 0.9rem;" id="alpha-desc-adoption">This scale comprises 5 Likert-type items measuring the frequency of fact-checking behaviors such as verifying sources and checking comments.</p>
+              <h3 style="font-family: var(--font-heading); margin-bottom: 5px; font-size: 1.15rem;">Verification Behaviour Profile (Q7 - Q8)</h3>
+              <p style="font-size: 0.9rem;" id="alpha-desc-adoption">This scale comprises 2 Likert items (Q7-Q8) measuring the Technology Adoption Score (Max 10). such as verifying sources and checking comments.</p>
             </div>
           </div>
           
@@ -322,7 +341,7 @@
               <option value="q1">Age Group (Section A1)</option>
               <option value="q2">Gender (Section A2)</option>
               <option value="q3">Educational Level (Section A3)</option>
-              <option value="q4">Field of Study/Work (Section A4)</option>
+              <option value="q14_clues">Primary Visual Clue relied upon (Section 5)</option>
             </select>
           </div>
           
@@ -355,7 +374,8 @@
               <option value="q1">Age Group (Section A1)</option>
               <option value="q2">Gender (Section A2)</option>
               <option value="q3">Educational Level (Section A3)</option>
-              <option value="q4">Field of Study/Work (Section A4)</option>
+              <option value="q4">Educational Qualification (Section A4)</option>
+              <option value="q9">Overconfidence Bias (Q9)</option>
             </select>
           </div>
           
@@ -460,7 +480,7 @@
             Multiple Linear Regression Model
           </h2>
           <div class="academic-explanation">
-            <strong>What is Multiple Linear Regression?</strong> It predicts a respondent's empirical AI Detection Accuracy ($Y$) based on two continuous predictors: their Digital Media Literacy Score ($X_1$) and their Verification Behaviour Score ($X_2$). The formula modeled is: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2$$
+            <strong>What is Multiple Linear Regression?</strong> It predicts a respondent's empirical AI Detection Accuracy ($Y$) based on continuous predictors such as Digital Media Literacy Score ($X_1$), Technology Adoption Score ($X_2$), and Time Spent Scrolling ($X_3$). The formula modeled is: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2$$
           </div>
           
           <!-- Regression Coefficients Table -->
@@ -639,6 +659,20 @@
           </div>
         </div>
       </section>
+    
+      <!-- 5. VISUAL QUESTION CHARTS TAB -->
+      <section id="tab-visual-charts" class="tab-content" style="display: none;">
+        <div class="card-header">
+          <span class="section-tag">Empirical Data Visualizations</span>
+          <h1 class="card-title">Survey Question Visualizations</h1>
+          <p class="card-description">Frequency distributions and detailed breakdown charts for every individual question and media test item in your study.</p>
+        </div>
+        
+        <div id="all-questions-charts-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+          <!-- Charts will be dynamically generated here -->
+        </div>
+      </section>
+
     </main>
   </div>
 

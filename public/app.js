@@ -2,296 +2,242 @@
 
 // State Management
 const defaultSurveyConfig = {
-  "title": "Academic Survey: AI-Generated Content Detection on Social Media",
-  "description": "Academic Research Study",
-  "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+      "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+  "aiImageClues": [
+    "Anatomy/Logic Errors: Weird fingers, extra limbs, or melting/merged objects.",
+    "Background/Text Errors: Unreadable or gibberish text, and illogical background elements.",
+    "Texture/Lighting Errors: Unnatural perfect lighting, excessive cinematic gloss, or \"plastic-like\" skin.",
+    "I didn't see any specific technical mistake; I just guessed."
+  ],
+  "aiVideoClues": [
+    "Lip-sync Mismatch: The audio does not properly align with the mouth movements.",
+    "Robotic Movements: Unnatural blinking patterns or stiff, robotic facial expressions.",
+    "Flickering/Glitches: Morphing edges around the face or an unstable, flickering background.",
+    "I didn't see any specific technical mistake; I just guessed."
+  ],
+  "authenticImageClues": [
+    "Natural Textures: Realistic skin pores, blemishes, and accurate natural shadows/lighting.",
+    "Logical Context: Identifiable real-world backgrounds and perfectly readable text.",
+    "Natural Imperfections: Normal human asymmetry and a lack of overly polished, artificial perfection.",
+    "I didn't notice any specific cues; it just looked completely flawless and real to me."
+  ],
+  "authenticVideoClues": [
+    "Natural Human Movements: Fluid body language and realistic, spontaneous facial expressions.",
+    "Perfect Audio-Visual Sync: The voice perfectly matches the natural movement of the lips.",
+    "Consistent Environment: A highly stable background with no morphing, blurring, or glitches during movement.",
+    "I didn't notice any specific cues; it just looked completely flawless and real to me."
+  ],
+  "description": "Academic Research Survey",
   "sections": [
     {
-      "id": "section_a",
-      "title": "SECTION A: Demographic Information",
-      "description": "Please provide your demographic details.",
+      "description": "Objective: To define the demographic boundaries",
+      "id": "section_1",
       "questions": [
         {
           "id": "q1",
           "type": "radio",
-          "text": "1. Gender",
+          "text": "1. What is your age?",
           "options": [
-            "Male",
-            "Female",
-            "Other",
-            "Prefer not to say"
+            "18 - 25",
+            "26 - 35",
+            "36 - 50",
+            "Above 50"
           ]
         },
         {
           "id": "q2",
           "type": "radio",
-          "text": "2. Age",
+          "text": "2. What is your gender?",
           "options": [
-            "18–24",
-            "25–34",
-            "35–44",
-            "45–54",
-            "55+"
+            "Male",
+            "Female"
           ]
         },
         {
           "id": "q3",
-          "type": "radio",
-          "text": "3. Educational Qualification",
+          "type": "dropdown",
+          "text": "3. Which district in the Malabar region do you currently reside in?",
           "options": [
-            "Higher Secondary",
-            "Diploma",
-            "Undergraduate",
-            "Postgraduate",
-            "Other"
+            "Kozhikode",
+            "Malappuram",
+            "Kannur",
+            "Wayanad",
+            "Palakkad",
+            "Kasaragod"
           ]
         },
         {
           "id": "q4",
           "type": "radio",
-          "text": "4. Which platform do you use most frequently?",
+          "text": "4. What is your highest educational qualification?",
           "options": [
-            "Instagram",
-            "Facebook",
-            "Both equally"
+            "High School / Plus Two",
+            "Undergraduate (Degree)",
+            "Postgraduate (PG)",
+            "Professional Degree / Diploma"
           ]
-        },
+        }
+      ],
+      "title": "SECTION 1: Socio-Demographic Profile"
+    },
+    {
+      "description": "Objective: To measure platform usage and exposure to fast-paced content",
+      "id": "section_2",
+      "questions": [
         {
           "id": "q5",
           "type": "radio",
-          "text": "5. Average daily social media use",
+          "text": "5. Which visual-centric platform do you use the most daily?",
           "options": [
-            "Less than 1 hour",
-            "1–2 hours",
-            "3–4 hours",
-            "5–6 hours",
-            "More than 6 hours"
+            "Instagram",
+            "Facebook",
+            "I use both equally"
           ]
-        }
-      ]
-    },
-    {
-      "id": "section_b",
-      "title": "SECTION B: Digital Media Literacy",
-      "description": "Indicate your level of agreement. (1 = Strongly Disagree, 5 = Strongly Agree)",
-      "questions": [
+        },
         {
           "id": "q6",
-          "type": "likert5",
-          "text": "Information Evaluation: I verify information before sharing it online."
-        },
+          "type": "radio",
+          "text": "6. Approximately how much time do you spend scrolling on these platforms per day?",
+          "options": [
+            "Less than 1 hour",
+            "1 to 3 hours",
+            "3 to 5 hours",
+            "More than 5 hours"
+          ]
+        }
+      ],
+      "title": "SECTION 2: Social Media & Algorithmic Feed Behavior"
+    },
+    {
+      "description": "Objective: To measure how quickly the user adopts new Generative AI tools. Will be calculated as 'Technology Adoption Score' in SPSSPlease indicate your level of agreement with the following statements:(Scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree)",
+      "id": "section_3",
+      "questions": [
         {
           "id": "q7",
           "type": "likert5",
-          "text": "Information Evaluation: I compare information from multiple sources before believing it."
+          "text": "7. I actively experiment with new Generative AI tools (like ChatGPT, Midjourney, AI filters) as soon as they become available."
         },
         {
           "id": "q8",
           "type": "likert5",
-          "text": "Information Evaluation: I can identify unreliable online information."
+          "text": "8. I feel very comfortable interacting with, liking, or sharing content on social media even if I know it is generated by AI."
         },
         {
           "id": "q9",
           "type": "likert5",
-          "text": "Information Evaluation: I pay attention to the source of information before trusting it."
-        },
+          "text": "9. I am highly confident in my personal ability to easily distinguish between a real photograph and a hyper-realistic AI image. (Measures Overconfidence Bias)"
+        }
+      ],
+      "title": "SECTION 3: Technology Adoption (Diffusion of Innovations Scale)"
+    },
+    {
+      "description": "Objective: To measure the actual fact-checking habits. Will be calculated as 'Media Literacy Score' in SPSSPlease rate how often you engage in the following behaviors while using social media:(Scale: 1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Often, 5 = Always)",
+      "id": "section_4",
+      "questions": [
         {
           "id": "q10",
-          "type": "likert5",
-          "text": "Platform Awareness: I understand that social media algorithms influence the content I see."
+          "type": "likert5Freq",
+          "text": "10. When I see a highly sensational or emotional visual on my feed, I pause to doubt its authenticity before believing it."
         },
         {
           "id": "q11",
-          "type": "likert5",
-          "text": "Platform Awareness: I am aware that AI can generate realistic images and videos."
+          "type": "likert5Freq",
+          "text": "11. I actively check the comments section or search Google to verify if a viral visual is real before sharing it with others."
         },
         {
           "id": "q12",
-          "type": "likert5",
-          "text": "Platform Awareness: I understand that visual content on social media may be manipulated."
-        },
-        {
-          "id": "q13",
-          "type": "likert5",
-          "text": "Critical Thinking: I question information that seems sensational or emotionally provocative."
-        },
-        {
-          "id": "q14",
-          "type": "likert5",
-          "text": "Critical Thinking: I look for evidence before accepting online claims."
-        },
-        {
-          "id": "q15",
-          "type": "likert5",
-          "text": "Critical Thinking: I critically evaluate visual content before believing it."
+          "type": "likert5Freq",
+          "text": "12. Before believing a viral visual, I actively check the profile or page that posted it to see if they are a trustworthy source."
         }
-      ]
+      ],
+      "title": "SECTION 4: Practical Digital Media Literacy (Content Literacy Scale)"
     },
     {
-      "id": "section_c",
-      "title": "SECTION C: Verification Behaviour",
-      "description": "Frequency Scale (1 = Never, 5 = Always)",
-      "questions": [
-        {
-          "id": "q16",
-          "type": "likert5Freq",
-          "text": "I check the original source of a post."
-        },
-        {
-          "id": "q17",
-          "type": "likert5Freq",
-          "text": "I search online to verify suspicious images."
-        },
-        {
-          "id": "q18",
-          "type": "likert5Freq",
-          "text": "I read comments or discussions before trusting a post."
-        },
-        {
-          "id": "q19",
-          "type": "likert5Freq",
-          "text": "I use fact-checking websites or reverse image searches."
-        },
-        {
-          "id": "q20",
-          "type": "likert5Freq",
-          "text": "I verify information before reposting or sharing it."
-        }
-      ]
-    },
-    {
-      "id": "section_d",
-      "title": "SECTION D: AI-Generated Content Exposure",
-      "description": "Please answer the following regarding your exposure to AI-generated content.",
-      "questions": [
-        {
-          "id": "q21",
-          "type": "radio",
-          "text": "16. Have you previously heard about AI-generated images or videos?",
-          "options": [
-            "Yes",
-            "No"
-          ]
-        },
-        {
-          "id": "q22",
-          "type": "radio",
-          "text": "17. How often do you encounter AI-generated content on social media?",
-          "options": [
-            "Never",
-            "Rarely",
-            "Sometimes",
-            "Often",
-            "Very Often"
-          ]
-        },
-        {
-          "id": "q23",
-          "type": "radio",
-          "text": "18. How confident are you in your ability to identify AI-generated images and videos?",
-          "options": [
-            "Very Low",
-            "Low",
-            "Moderate",
-            "High",
-            "Very High"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_e",
-      "title": "SECTION E: Detection Test",
-      "description": "Look at each image/video shown and select your answer and confidence level.",
+      "description": "Objective: To test practical accuracy and identify the cues used. Keep this short with just 8 media items to avoid survey fatigue.\nInstructions: Please look closely at the 8 media items below and answer the two questions for each.",
+      "id": "section_5",
       "isMediaSection": true,
       "mediaItems": [
         {
+          "anomalies": "Symmetry errors in the backpack straps, surreal light source reflecting on the helmet visor showing trees, physics-defying lavender stems.",
+          "description": "Photorealistic depiction of an astronaut picking purple lavender under a bright orange Martian sky.",
           "id": "m1",
-          "type": "image",
-          "title": "Image 1",
-          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
+          "title": "1",
           "trueType": "ai",
-          "description": "Image 1 Placeholder"
+          "type": "image",
+          "url": "https://cdn.mos.cms.futurecdn.net/43aVbKLKvmqfcfnR2YEvyA-1200-80.png.webp"
         },
         {
+          "anomalies": "No AI anomalies. Perfect reflections on wet floor, clear and legible price tags in Japanese kanji, anatomically correct hands holding ice scoop.",
+          "description": "Stunning street photography of a vendor smiling behind his seafood stall at Tsukiji Market, Tokyo.",
           "id": "m2",
-          "type": "image",
-          "title": "Image 2",
-          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
+          "title": "2",
           "trueType": "real",
-          "description": "Image 2 Placeholder"
+          "type": "image",
+          "url": "https://cdn.mos.cms.futurecdn.net/kPFybQBSrpiuFeqi9UaDZ4-1200-80.jpg.webp"
         },
         {
+          "anomalies": "Surreal biological fusion, blending textures between turtle shell and fertile soil, impossible lighting patterns deep underwater.",
+          "description": "A giant sea turtle swimming in deep blue ocean waters with an entire tropical forest growing on its shell.",
           "id": "m3",
-          "type": "image",
-          "title": "Image 3",
-          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800",
+          "title": "3",
           "trueType": "ai",
-          "description": "Image 3 Placeholder"
+          "type": "video",
+          "url": "https://youtu.be/cFzsUZyCReo"
         },
         {
+          "anomalies": "No AI anomalies. Flawless human anatomy, realistic physics-based liquid viscosity, consistent focus plane, authentic light refraction through honey.",
+          "description": "High-contrast close-up shot of liquid honey dripping between fingers, capturing natural skin pores and hair.",
           "id": "m4",
-          "type": "image",
-          "title": "Image 4",
-          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
+          "title": "4",
           "trueType": "real",
-          "description": "Image 4 Placeholder"
+          "type": "video",
+          "url": "https://youtube.com/shorts/nJFe0JIcPf4?feature=share"
         },
         {
+          "anomalies": "No anomalies. Clear depth of field and realistic shadows.",
+          "description": "A bustling city street with neon lights reflecting on a wet pavement.",
           "id": "m5",
+          "title": "5",
+          "trueType": "real",
           "type": "image",
-          "title": "Image 5",
-          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
-          "trueType": "ai",
-          "description": "Image 5 Placeholder"
+          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800"
         },
         {
-          "id": "v1",
-          "type": "video",
-          "title": "Video 1",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "anomalies": "Unnatural lighting and overly smooth textures. Text in the background is unreadable gibberish.",
+          "description": "Futuristic cyberpunk character standing in an alleyway.",
+          "id": "m6",
+          "title": "6",
           "trueType": "ai",
-          "description": "Video 1 Placeholder"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800"
         },
         {
-          "id": "v2",
-          "type": "video",
-          "title": "Video 2",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "anomalies": "Slight anatomical inconsistencies in background characters and unnatural depth separation.",
+          "description": "Aerial view of a fantastical castle built into the side of a massive waterfall.",
+          "id": "m7",
+          "title": "7",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+          "anomalies": "No anomalies. Natural lighting and true-to-life textures.",
+          "description": "Close-up of a person's hands holding a warm cup of coffee.",
+          "id": "m8",
+          "title": "8",
           "trueType": "real",
-          "description": "Video 2 Placeholder"
-        },
-        {
-          "id": "v3",
-          "type": "video",
-          "title": "Video 3",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-          "trueType": "ai",
-          "description": "Video 3 Placeholder"
-        },
-        {
-          "id": "v4",
-          "type": "video",
-          "title": "Video 4",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-          "trueType": "real",
-          "description": "Video 4 Placeholder"
-        },
-        {
-          "id": "v5",
-          "type": "video",
-          "title": "Video 5",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-          "trueType": "ai",
-          "description": "Video 5 Placeholder"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800"
         }
-      ]
+      ],
+      "title": "SECTION 5: Practical Visual Test (Simulacra Detection)"
     }
-  ]
+  ],
+  "title": "Digital Media Literacy and AI Detection Survey"
 };
 
 // Base API configuration and hybrid routing
-const FIREBASE_DB_URL = 'https://research-344f8-default-rtdb.asia-southeast1.firebasedatabase.app';
+const FIREBASE_DB_URL = '';
 const USE_CLOUD_STORAGE = false; // CRITICAL FIX: Always route through Vercel backend (server.js) for security
 const API_BASE = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'http://localhost:3000' : '';
 
@@ -308,6 +254,7 @@ const screenConsent = document.getElementById('screen-consent');
 const screenQuestions = document.getElementById('screen-questions');
 const screenEnd = document.getElementById('screen-end');
 const screenDecline = document.getElementById('screen-decline');
+const screenScreenOut = document.getElementById('screen-screenout');
 const progressWrapper = document.getElementById('survey-progress-wrapper');
 const progressBar = document.getElementById('survey-progress');
 const placeholderCard = document.getElementById('dynamic-card-placeholder');
@@ -468,7 +415,7 @@ function renderSection(index) {
     // Section E: AI Generated Media Items
     section.mediaItems.forEach((item, itemIdx) => {
       const savedVal = participantAnswers[item.id] || '';
-      const savedConf = participantAnswers[`${item.id}_confidence`] || '';
+      const savedClue = participantAnswers[`${item.id}_clue`] || '';
       const savedHelped = participantAnswers[`${item.id}_helped`] || [];
       
       const mediaType = item.type || 'image';
@@ -544,40 +491,37 @@ function renderSection(index) {
           
           ${mediaHtml}
           
-          <!-- Q25: Classification -->
+          
+          <!-- Q13: Classification -->
           <div class="form-group">
             <label class="question-text">
-              <span class="question-num"></span> Is this image:
+              <span class="question-num"></span> 13. Do you think this media is:
             </label>
             <div class="options-list">
-              <label class="option-item ${savedVal === 'real' ? 'checked-item' : ''}" onclick="toggleOptionClass(this)">
-                <input type="radio" name="${item.id}" value="real" ${savedVal === 'real' ? 'checked' : ''} onchange="saveAnswer('${item.id}', 'real')">
+              <label class="option-item ${savedVal === 'Authentic' ? 'checked-item' : ''}" onclick="toggleOptionClass(this)">
+                <input type="radio" name="${item.id}" value="Authentic" ${savedVal === 'Authentic' ? 'checked' : ''} onchange="handleMediaClassificationChange('${item.id}', 'Authentic')">
                 <div class="custom-indicator"></div>
-                <span class="option-label">Real</span>
+                <span class="option-label">Authentic (A real photograph/video captured by a camera)</span>
               </label>
-              <label class="option-item ${savedVal === 'ai' ? 'checked-item' : ''}" onclick="toggleOptionClass(this)">
-                <input type="radio" name="${item.id}" value="ai" ${savedVal === 'ai' ? 'checked' : ''} onchange="saveAnswer('${item.id}', 'ai')">
+              <label class="option-item ${savedVal === 'AI-Generated' ? 'checked-item' : ''}" onclick="toggleOptionClass(this)">
+                <input type="radio" name="${item.id}" value="AI-Generated" ${savedVal === 'AI-Generated' ? 'checked' : ''} onchange="handleMediaClassificationChange('${item.id}', 'AI-Generated')">
                 <div class="custom-indicator"></div>
-                <span class="option-label">AI Generated</span>
+                <span class="option-label">AI-Generated (Created using Artificial Intelligence)</span>
               </label>
             </div>
           </div>
           
-          <!-- Q26: Confidence -->
-          <div class="form-group" style="margin-top: 25px;">
+          <!-- Q14: Clue (Conditional) -->
+          <div class="form-group conditional-clue-group" id="clue-group-${item.id}" style="${savedVal ? 'display: block;' : 'display: none;'} margin-top: 25px;">
             <label class="question-text">
-              <span class="question-num"></span> Confidence Level:
+              <span class="question-num"></span> 14. Based on your selection, what was the PRIMARY visual clue you relied on?
             </label>
-            <div class="options-list" style="flex-direction: row; flex-wrap: wrap; gap: 8px;">
-              ${["Very Uncertain", "Uncertain", "Neutral", "Confident", "Very Confident"].map((cOption, cIdx) => `
-                <label class="option-item ${savedConf === cOption ? 'checked-item' : ''}" style="padding: 10px 16px; flex-grow: 1; justify-content: center;" onclick="toggleOptionClass(this)">
-                  <input type="radio" name="${item.id}_confidence" value="${cOption}" ${savedConf === cOption ? 'checked' : ''} onchange="saveAnswer('${item.id}_confidence', '${cOption}')">
-                  <div class="custom-indicator" style="margin-right: 8px;"></div>
-                  <span class="option-label" style="font-size: 0.9rem;">${cOption}</span>
-                </label>
-              `).join('')}
+            <div class="options-list" id="clue-options-${item.id}" style="flex-direction: column; gap: 8px;">
+              <!-- Options populated by JS -->
             </div>
           </div>
+        </div>
+
         </div>
       `;
     });
@@ -607,6 +551,17 @@ function renderSection(index) {
         });
         html += `</div>`;
       } 
+      else if (q.type === 'dropdown') {
+        const savedVal = participantAnswers[q.id] || '';
+        html += `
+          <div style="margin-top: 15px;">
+            <select name="${q.id}" class="form-input" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.2); color: var(--text-primary); font-size: 1rem; cursor: pointer;" onchange="saveAnswer('${q.id}', this.value)">
+              <option value="" disabled ${!savedVal ? 'selected' : ''}>-- Select an option --</option>
+              ${q.options.map(opt => `<option value="${opt}" ${savedVal === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      }
       else if (q.type === 'checkbox') {
         html += `<div class="options-list">`;
         q.options.forEach(opt => {
@@ -722,9 +677,15 @@ window.toggleOptionClass = function(labelEl, isCheckbox = false) {
 
 // Option Styling visual helper (Likert list)
 window.toggleLikertClass = function(labelEl) {
-  const siblings = labelEl.parentElement.querySelectorAll('.likert-option');
-  siblings.forEach(s => s.classList.remove('checked-likert'));
-  labelEl.classList.add('checked-likert');
+    const siblings = labelEl.parentElement.querySelectorAll('.likert-option');
+    siblings.forEach(s => s.classList.remove('checked-likert'));
+    labelEl.classList.add('checked-likert');
+    
+    const input = labelEl.querySelector('input[type="radio"]');
+    if (input) {
+      input.checked = true;
+      saveAnswer(input.name, input.value);
+    }
 };
 
 // Save standard answer to in-memory state
@@ -778,6 +739,27 @@ btnNext.addEventListener('click', () => {
     return;
   }
   
+  // Check for Screen Out responses
+  const section = surveyConfig.sections[currentSectionIndex];
+  let isScreenedOut = false;
+  
+  if (!section.isMediaSection) {
+    section.questions.forEach(q => {
+      const answer = participantAnswers[q.id];
+      if (typeof answer === 'string' && answer.includes('(Screen out')) {
+        isScreenedOut = true;
+      }
+    });
+  }
+  
+  if (isScreenedOut) {
+    // Terminate survey for Screen Out demographic responses
+    progressWrapper.style.display = 'none';
+    screenQuestions.style.display = 'none';
+    if(screenScreenOut) screenScreenOut.style.display = 'block';
+    return; // Don't allow advancing or submitting
+  }
+  
   if (currentSectionIndex < totalSectionsCount - 1) {
     currentSectionIndex++;
     renderSection(currentSectionIndex);
@@ -794,13 +776,13 @@ function validateCurrentSection() {
   let firstInvalidElement = null;
   
   if (section.isMediaSection) {
-    // Validate Section E: Each item must have classification, confidence, and helped options filled
+    // Validate Section E: Each item must have classification and clue filled
     section.mediaItems.forEach(item => {
       const classification = participantAnswers[item.id];
-      const confidence = participantAnswers[`${item.id}_confidence`];
+      const clue = participantAnswers[`${item.id}_clue`];
       
       
-      if (!classification || !confidence) {
+      if (!classification || !clue) {
         isValid = false;
         
         const grp = document.getElementById(`media-block-${item.id}`);
@@ -824,6 +806,7 @@ function validateCurrentSection() {
     section.questions.forEach(q => {
       const answer = participantAnswers[q.id];
       if (answer === undefined || answer === '') {
+        console.log('Validation failed on question: ' + q.id);
         isValid = false;
         
         // Highlight visual container with standard CSS animation alert
@@ -918,3 +901,64 @@ async function submitSurvey() {
 document.addEventListener('DOMContentLoaded', () => {
   loadSurveyConfig();
 });
+
+
+// Expose surveyConfig clues to global for dynamic rendering
+window.getCluesList = function(classification, itemType) {
+    if (!surveyConfig) return [];
+    if (classification === 'AI-Generated') {
+      return itemType === 'video' ? (surveyConfig.aiVideoClues || []) : (surveyConfig.aiImageClues || []);
+    }
+    if (classification === 'Authentic') {
+      return itemType === 'video' ? (surveyConfig.authenticVideoClues || []) : (surveyConfig.authenticImageClues || []);
+    }
+    return [];
+  };
+
+window.handleMediaClassificationChange = function(itemId, value) {
+  saveAnswer(itemId, value);
+  
+  // Clear the existing clue answer because the category changed
+  saveAnswer(itemId + '_clue', '');
+  
+  renderClueOptions(itemId, value);
+};
+
+window.renderClueOptions = function(itemId, classificationValue) {
+  const clueGroup = document.getElementById('clue-group-' + itemId);
+  const clueOptionsContainer = document.getElementById('clue-options-' + itemId);
+  
+  if (!clueGroup || !clueOptionsContainer) return;
+  
+  // Find the item to get its type
+    let itemType = 'image';
+    if (surveyConfig && surveyConfig.sections) {
+      const mediaSection = surveyConfig.sections.find(s => s.isMediaSection);
+      if (mediaSection && mediaSection.mediaItems) {
+        const item = mediaSection.mediaItems.find(m => m.id === itemId);
+        if (item && item.type) {
+          itemType = item.type;
+        }
+      }
+    }
+    const clues = window.getCluesList(classificationValue, itemType);
+  const savedClue = participantAnswers[itemId + '_clue'] || '';
+  
+  if (clues.length > 0) {
+    clueGroup.style.display = 'block';
+    
+    clueOptionsContainer.innerHTML = clues.map(cOption => {
+      const safeVal = cOption.replace(/"/g, '&quot;');
+      const safeJsArgs = cOption.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      return `
+      <label class="option-item ${savedClue === cOption ? 'checked-item' : ''}" style="padding: 10px 16px; justify-content: flex-start;" onclick="toggleOptionClass(this)">
+        <input type="radio" name="${itemId}_clue" value="${safeVal}" ${savedClue === cOption ? 'checked' : ''} onchange="saveAnswer('${itemId}_clue', '${safeJsArgs}')">
+        <div class="custom-indicator" style="margin-right: 8px;"></div>
+        <span class="option-label" style="font-size: 0.9rem;">${cOption}</span>
+      </label>
+      `;
+    }).join('');
+  } else {
+    clueGroup.style.display = 'none';
+  }
+};

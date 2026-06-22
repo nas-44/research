@@ -1,40 +1,32 @@
-{
-  "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
-  "aiImageClues": [
-    "Anatomy/Logic Errors: Weird fingers, extra limbs, or melting/merged objects.",
-    "Background/Text Errors: Unreadable or gibberish text, and illogical background elements.",
-    "Texture/Lighting Errors: Unnatural perfect lighting, excessive cinematic gloss, or \"plastic-like\" skin.",
-    "I didn't see any specific technical mistake; I just guessed."
+const fs = require('fs');
+
+const newSurveyConfig = {
+  "title": "Digital Media Literacy and AI Detection Survey",
+  "description": "Welcome! This academic survey investigates social media habits, the adoption of new AI technologies, and your practical ability to detect AI-generated visual media (Simulacra). Your responses are strictly anonymous and will be used solely for postgraduate academic research. The survey will take approximately 3 to 4 minutes to complete.",
+  "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 3-4 minutes",
+  "aiClues": [
+    "Anatomy/Logic Errors: Weird fingers, extra limbs, melting objects, or unreadable/gibberish text. (For Images)",
+    "Texture/Lighting Errors: Unnatural perfect lighting, \"plastic-like\" skin, or excessive cinematic gloss. (For Images)",
+    "Movement Errors: Lip-sync mismatch, robotic blinking, or unnatural body physics. (For Videos)",
+    "I didn't see any specific technical mistake; it just felt artificial to me."
   ],
-  "aiVideoClues": [
-    "Lip-sync Mismatch: The audio does not properly align with the mouth movements.",
-    "Robotic Movements: Unnatural blinking patterns or stiff, robotic facial expressions.",
-    "Flickering/Glitches: Morphing edges around the face or an unstable, flickering background.",
-    "I didn't see any specific technical mistake; I just guessed."
+  "authenticClues": [
+    "Natural Imperfections: Realistic skin textures, natural asymmetry, and normal lighting/shadows.",
+    "Logical Context: Identifiable real-world location, readable text, and a natural, unblurred background.",
+    "I didn't see any specific proof; it just looked completely flawless and real to me."
   ],
-  "authenticImageClues": [
-    "Natural Textures: Realistic skin pores, blemishes, and accurate natural shadows/lighting.",
-    "Logical Context: Identifiable real-world backgrounds and perfectly readable text.",
-    "Natural Imperfections: Normal human asymmetry and a lack of overly polished, artificial perfection.",
-    "I didn't notice any specific cues; it just looked completely flawless and real to me."
-  ],
-  "authenticVideoClues": [
-    "Natural Human Movements: Fluid body language and realistic, spontaneous facial expressions.",
-    "Perfect Audio-Visual Sync: The voice perfectly matches the natural movement of the lips.",
-    "Consistent Environment: A highly stable background with no morphing, blurring, or glitches during movement.",
-    "I didn't notice any specific cues; it just looked completely flawless and real to me."
-  ],
-  "description": "Academic Research Survey",
   "sections": [
     {
-      "description": "Objective: To define the demographic boundaries",
       "id": "section_1",
+      "title": "SECTION 1: Socio-Demographic Profile",
+      "description": "(Objective: To define the demographic boundaries)",
       "questions": [
         {
           "id": "q1",
           "type": "radio",
           "text": "1. What is your age?",
           "options": [
+            "Under 18 (Screen out / End Survey)",
             "18 - 25",
             "26 - 35",
             "36 - 50",
@@ -60,7 +52,8 @@
             "Kannur",
             "Wayanad",
             "Palakkad",
-            "Kasaragod"
+            "Kasaragod",
+            "Other (Screen out)"
           ]
         },
         {
@@ -74,12 +67,12 @@
             "Professional Degree / Diploma"
           ]
         }
-      ],
-      "title": "SECTION 1: Socio-Demographic Profile"
+      ]
     },
     {
-      "description": "Objective: To measure platform usage and exposure to fast-paced content",
       "id": "section_2",
+      "title": "SECTION 2: Social Media & Algorithmic Feed Behavior",
+      "description": "(Objective: To measure platform usage and exposure to fast-paced content)",
       "questions": [
         {
           "id": "q5",
@@ -102,12 +95,12 @@
             "More than 5 hours"
           ]
         }
-      ],
-      "title": "SECTION 2: Social Media & Algorithmic Feed Behavior"
+      ]
     },
     {
-      "description": "Objective: To measure how quickly the user adopts new Generative AI tools. Will be calculated as 'Technology Adoption Score' in SPSSPlease indicate your level of agreement with the following statements:(Scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree)",
       "id": "section_3",
+      "title": "SECTION 3: Technology Adoption (Diffusion of Innovations Scale)",
+      "description": "(Objective: To measure how quickly the user adopts new Generative AI tools. Will be calculated as 'Technology Adoption Score' in SPSS)\nPlease indicate your level of agreement with the following statements:\n(Scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree)",
       "questions": [
         {
           "id": "q7",
@@ -124,12 +117,12 @@
           "type": "likert5",
           "text": "9. I am highly confident in my personal ability to easily distinguish between a real photograph and a hyper-realistic AI image. (Measures Overconfidence Bias)"
         }
-      ],
-      "title": "SECTION 3: Technology Adoption (Diffusion of Innovations Scale)"
+      ]
     },
     {
-      "description": "Objective: To measure the actual fact-checking habits. Will be calculated as 'Media Literacy Score' in SPSSPlease rate how often you engage in the following behaviors while using social media:(Scale: 1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Often, 5 = Always)",
       "id": "section_4",
+      "title": "SECTION 4: Practical Digital Media Literacy (Content Literacy Scale)",
+      "description": "(Objective: To measure the actual fact-checking habits. Will be calculated as 'Media Literacy Score' in SPSS)\nPlease rate how often you engage in the following behaviors while using social media:\n(Scale: 1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Often, 5 = Always)",
       "questions": [
         {
           "id": "q10",
@@ -139,19 +132,19 @@
         {
           "id": "q11",
           "type": "likert5Freq",
-          "text": "11. I actively check the comments section or search Google to verify if a viral visual is real before sharing it with others."
+          "text": "11. If a visual seems too shocking or unbelievable, I check traditional news websites or Google to confirm if it actually happened."
         },
         {
           "id": "q12",
           "type": "likert5Freq",
           "text": "12. Before believing a viral visual, I actively check the profile or page that posted it to see if they are a trustworthy source."
         }
-      ],
-      "title": "SECTION 4: Practical Digital Media Literacy (Content Literacy Scale)"
+      ]
     },
     {
-      "description": "Objective: To test practical accuracy and identify the cues used. Keep this short with just 8 media items to avoid survey fatigue.\nInstructions: Please look closely at the 8 media items below and answer the two questions for each.",
       "id": "section_5",
+      "title": "SECTION 5: Practical Visual Test (Simulacra Detection)",
+      "description": "(Objective: To test practical accuracy and identify the cues used. Includes exactly 8 media items: 4 Authentic and 4 AI-Generated. Uses Conditional Logic).\nInstructions: Please look closely at the 8 media items below and answer the two questions for each.",
       "isMediaSection": true,
       "mediaItems": [
         {
@@ -161,7 +154,7 @@
           "title": "1",
           "trueType": "ai",
           "type": "image",
-          "url": "https://i.ibb.co/TMZNqMJB/create-image-6fddebac.png"
+          "url": "https://cdn.mos.cms.futurecdn.net/43aVbKLKvmqfcfnR2YEvyA-1200-80.png.webp"
         },
         {
           "anomalies": "No AI anomalies. Perfect reflections on wet floor, clear and legible price tags in Japanese kanji, anatomically correct hands holding ice scoop.",
@@ -178,8 +171,8 @@
           "id": "m3",
           "title": "3",
           "trueType": "ai",
-          "type": "image",
-          "url": "https://i.ibb.co/cKk9r8hC/Copilot-20260621-112819.png"
+          "type": "video",
+          "url": "https://youtu.be/cFzsUZyCReo"
         },
         {
           "anomalies": "No AI anomalies. Flawless human anatomy, realistic physics-based liquid viscosity, consistent focus plane, authentic light refraction through honey.",
@@ -187,8 +180,8 @@
           "id": "m4",
           "title": "4",
           "trueType": "real",
-          "type": "image",
-          "url": "https://i.ibb.co/rGLPTfcM/abdullah-azeez-LJzc-RIc-LZ-s-unsplash.jpg"
+          "type": "video",
+          "url": "https://youtube.com/shorts/nJFe0JIcPf4?feature=share"
         },
         {
           "anomalies": "No anomalies. Clear depth of field and realistic shadows.",
@@ -196,8 +189,8 @@
           "id": "m5",
           "title": "5",
           "trueType": "real",
-          "type": "video",
-          "url": "https://www.image2url.com/r2/default/videos/1782107867429-8ccc4dd7-a6d4-4b0f-afe4-6a0966467c9a.mp4"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800"
         },
         {
           "anomalies": "Unnatural lighting and overly smooth textures. Text in the background is unreadable gibberish.",
@@ -205,8 +198,8 @@
           "id": "m6",
           "title": "6",
           "trueType": "ai",
-          "type": "video",
-          "url": "https://youtube.com/shorts/mC_oVoJZPWI"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800"
         },
         {
           "anomalies": "Slight anatomical inconsistencies in background characters and unnatural depth separation.",
@@ -214,8 +207,8 @@
           "id": "m7",
           "title": "7",
           "trueType": "ai",
-          "type": "video",
-          "url": "https://youtu.be/lp3M_gQW9rw?si=eV-AjYH3cwJAfabc"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800"
         },
         {
           "anomalies": "No anomalies. Natural lighting and true-to-life textures.",
@@ -223,12 +216,25 @@
           "id": "m8",
           "title": "8",
           "trueType": "real",
-          "type": "video",
-          "url": "https://youtube.com/shorts/SC579K8Efl4?feature=share"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800"
         }
-      ],
-      "title": "SECTION 5: Practical Visual Test (Simulacra Detection)"
+      ]
     }
-  ],
-  "title": "Digital Media Literacy and AI Detection Survey"
-}
+  ]
+};
+
+// 1. Update survey_config.json
+fs.writeFileSync('d:/Desktop/RESEARCH/survey/research/survey_config.json', JSON.stringify(newSurveyConfig, null, 2));
+console.log('Updated survey_config.json');
+
+// 2. Update defaultSurveyConfig in admin.js
+const adminJsPath = 'd:/Desktop/RESEARCH/survey/research/public/admin.js';
+let adminJsContent = fs.readFileSync(adminJsPath, 'utf8');
+
+const regex = /const defaultSurveyConfig = \{[\s\S]*?let surveyConfig = null;/;
+const replacement = 'const defaultSurveyConfig = ' + JSON.stringify(newSurveyConfig, null, 2) + ';\n\nlet surveyConfig = null;';
+adminJsContent = adminJsContent.replace(regex, replacement);
+
+fs.writeFileSync(adminJsPath, adminJsContent);
+console.log('Updated defaultSurveyConfig in admin.js');

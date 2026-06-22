@@ -1,298 +1,244 @@
 // CMS & STATISTICAL ANALYSIS CENTER LOGIC
 
 // Base API configuration and hybrid routing
-const FIREBASE_DB_URL = 'https://research-344f8-default-rtdb.asia-southeast1.firebasedatabase.app';
+const FIREBASE_DB_URL = '';
 const USE_CLOUD_STORAGE = false; // CRITICAL FIX: Always route through Vercel backend (server.js) for security
 const API_BASE = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'http://localhost:3000' : '';
 
 // State
 const defaultSurveyConfig = {
-  "title": "Academic Survey: AI-Generated Content Detection on Social Media",
-  "description": "Academic Research Study",
-  "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+      "consentText": "Hello,\nThis survey is conducted as part of an academic research study. The purpose of this study is to understand how people identify AI-generated images and videos on social media platforms.\n\nYour responses will remain confidential and used only for research purposes.\n\n⏳ Time required: 5–7 minutes",
+  "aiImageClues": [
+    "Anatomy/Logic Errors: Weird fingers, extra limbs, or melting/merged objects.",
+    "Background/Text Errors: Unreadable or gibberish text, and illogical background elements.",
+    "Texture/Lighting Errors: Unnatural perfect lighting, excessive cinematic gloss, or \"plastic-like\" skin.",
+    "I didn't see any specific technical mistake; I just guessed."
+  ],
+  "aiVideoClues": [
+    "Lip-sync Mismatch: The audio does not properly align with the mouth movements.",
+    "Robotic Movements: Unnatural blinking patterns or stiff, robotic facial expressions.",
+    "Flickering/Glitches: Morphing edges around the face or an unstable, flickering background.",
+    "I didn't see any specific technical mistake; I just guessed."
+  ],
+  "authenticImageClues": [
+    "Natural Textures: Realistic skin pores, blemishes, and accurate natural shadows/lighting.",
+    "Logical Context: Identifiable real-world backgrounds and perfectly readable text.",
+    "Natural Imperfections: Normal human asymmetry and a lack of overly polished, artificial perfection.",
+    "I didn't notice any specific cues; it just looked completely flawless and real to me."
+  ],
+  "authenticVideoClues": [
+    "Natural Human Movements: Fluid body language and realistic, spontaneous facial expressions.",
+    "Perfect Audio-Visual Sync: The voice perfectly matches the natural movement of the lips.",
+    "Consistent Environment: A highly stable background with no morphing, blurring, or glitches during movement.",
+    "I didn't notice any specific cues; it just looked completely flawless and real to me."
+  ],
+  "description": "Academic Research Survey",
   "sections": [
     {
-      "id": "section_a",
-      "title": "SECTION A: Demographic Information",
-      "description": "Please provide your demographic details.",
+      "description": "Objective: To define the demographic boundaries",
+      "id": "section_1",
       "questions": [
         {
           "id": "q1",
           "type": "radio",
-          "text": "1. Gender",
+          "text": "1. What is your age?",
           "options": [
-            "Male",
-            "Female",
-            "Other",
-            "Prefer not to say"
+            "18 - 25",
+            "26 - 35",
+            "36 - 50",
+            "Above 50"
           ]
         },
         {
           "id": "q2",
           "type": "radio",
-          "text": "2. Age",
+          "text": "2. What is your gender?",
           "options": [
-            "18–24",
-            "25–34",
-            "35–44",
-            "45–54",
-            "55+"
+            "Male",
+            "Female"
           ]
         },
         {
           "id": "q3",
-          "type": "radio",
-          "text": "3. Educational Qualification",
+          "type": "dropdown",
+          "text": "3. Which district in the Malabar region do you currently reside in?",
           "options": [
-            "Higher Secondary",
-            "Diploma",
-            "Undergraduate",
-            "Postgraduate",
-            "Other"
+            "Kozhikode",
+            "Malappuram",
+            "Kannur",
+            "Wayanad",
+            "Palakkad",
+            "Kasaragod"
           ]
         },
         {
           "id": "q4",
           "type": "radio",
-          "text": "4. Which platform do you use most frequently?",
+          "text": "4. What is your highest educational qualification?",
           "options": [
-            "Instagram",
-            "Facebook",
-            "Both equally"
+            "High School / Plus Two",
+            "Undergraduate (Degree)",
+            "Postgraduate (PG)",
+            "Professional Degree / Diploma"
           ]
-        },
+        }
+      ],
+      "title": "SECTION 1: Socio-Demographic Profile"
+    },
+    {
+      "description": "Objective: To measure platform usage and exposure to fast-paced content",
+      "id": "section_2",
+      "questions": [
         {
           "id": "q5",
           "type": "radio",
-          "text": "5. Average daily social media use",
+          "text": "5. Which visual-centric platform do you use the most daily?",
           "options": [
-            "Less than 1 hour",
-            "1–2 hours",
-            "3–4 hours",
-            "5–6 hours",
-            "More than 6 hours"
+            "Instagram",
+            "Facebook",
+            "I use both equally"
           ]
-        }
-      ]
-    },
-    {
-      "id": "section_b",
-      "title": "SECTION B: Digital Media Literacy",
-      "description": "Indicate your level of agreement. (1 = Strongly Disagree, 5 = Strongly Agree)",
-      "questions": [
+        },
         {
           "id": "q6",
-          "type": "likert5",
-          "text": "Information Evaluation: I verify information before sharing it online."
-        },
+          "type": "radio",
+          "text": "6. Approximately how much time do you spend scrolling on these platforms per day?",
+          "options": [
+            "Less than 1 hour",
+            "1 to 3 hours",
+            "3 to 5 hours",
+            "More than 5 hours"
+          ]
+        }
+      ],
+      "title": "SECTION 2: Social Media & Algorithmic Feed Behavior"
+    },
+    {
+      "description": "Objective: To measure how quickly the user adopts new Generative AI tools. Will be calculated as 'Technology Adoption Score' in SPSSPlease indicate your level of agreement with the following statements:(Scale: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree)",
+      "id": "section_3",
+      "questions": [
         {
           "id": "q7",
           "type": "likert5",
-          "text": "Information Evaluation: I compare information from multiple sources before believing it."
+          "text": "7. I actively experiment with new Generative AI tools (like ChatGPT, Midjourney, AI filters) as soon as they become available."
         },
         {
           "id": "q8",
           "type": "likert5",
-          "text": "Information Evaluation: I can identify unreliable online information."
+          "text": "8. I feel very comfortable interacting with, liking, or sharing content on social media even if I know it is generated by AI."
         },
         {
           "id": "q9",
           "type": "likert5",
-          "text": "Information Evaluation: I pay attention to the source of information before trusting it."
-        },
+          "text": "9. I am highly confident in my personal ability to easily distinguish between a real photograph and a hyper-realistic AI image. (Measures Overconfidence Bias)"
+        }
+      ],
+      "title": "SECTION 3: Technology Adoption (Diffusion of Innovations Scale)"
+    },
+    {
+      "description": "Objective: To measure the actual fact-checking habits. Will be calculated as 'Media Literacy Score' in SPSSPlease rate how often you engage in the following behaviors while using social media:(Scale: 1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Often, 5 = Always)",
+      "id": "section_4",
+      "questions": [
         {
           "id": "q10",
-          "type": "likert5",
-          "text": "Platform Awareness: I understand that social media algorithms influence the content I see."
+          "type": "likert5Freq",
+          "text": "10. When I see a highly sensational or emotional visual on my feed, I pause to doubt its authenticity before believing it."
         },
         {
           "id": "q11",
-          "type": "likert5",
-          "text": "Platform Awareness: I am aware that AI can generate realistic images and videos."
+          "type": "likert5Freq",
+          "text": "11. I actively check the comments section or search Google to verify if a viral visual is real before sharing it with others."
         },
         {
           "id": "q12",
-          "type": "likert5",
-          "text": "Platform Awareness: I understand that visual content on social media may be manipulated."
-        },
-        {
-          "id": "q13",
-          "type": "likert5",
-          "text": "Critical Thinking: I question information that seems sensational or emotionally provocative."
-        },
-        {
-          "id": "q14",
-          "type": "likert5",
-          "text": "Critical Thinking: I look for evidence before accepting online claims."
-        },
-        {
-          "id": "q15",
-          "type": "likert5",
-          "text": "Critical Thinking: I critically evaluate visual content before believing it."
+          "type": "likert5Freq",
+          "text": "12. Before believing a viral visual, I actively check the profile or page that posted it to see if they are a trustworthy source."
         }
-      ]
+      ],
+      "title": "SECTION 4: Practical Digital Media Literacy (Content Literacy Scale)"
     },
     {
-      "id": "section_c",
-      "title": "SECTION C: Verification Behaviour",
-      "description": "Frequency Scale (1 = Never, 5 = Always)",
-      "questions": [
-        {
-          "id": "q16",
-          "type": "likert5Freq",
-          "text": "I check the original source of a post."
-        },
-        {
-          "id": "q17",
-          "type": "likert5Freq",
-          "text": "I search online to verify suspicious images."
-        },
-        {
-          "id": "q18",
-          "type": "likert5Freq",
-          "text": "I read comments or discussions before trusting a post."
-        },
-        {
-          "id": "q19",
-          "type": "likert5Freq",
-          "text": "I use fact-checking websites or reverse image searches."
-        },
-        {
-          "id": "q20",
-          "type": "likert5Freq",
-          "text": "I verify information before reposting or sharing it."
-        }
-      ]
-    },
-    {
-      "id": "section_d",
-      "title": "SECTION D: AI-Generated Content Exposure",
-      "description": "Please answer the following regarding your exposure to AI-generated content.",
-      "questions": [
-        {
-          "id": "q21",
-          "type": "radio",
-          "text": "16. Have you previously heard about AI-generated images or videos?",
-          "options": [
-            "Yes",
-            "No"
-          ]
-        },
-        {
-          "id": "q22",
-          "type": "radio",
-          "text": "17. How often do you encounter AI-generated content on social media?",
-          "options": [
-            "Never",
-            "Rarely",
-            "Sometimes",
-            "Often",
-            "Very Often"
-          ]
-        },
-        {
-          "id": "q23",
-          "type": "radio",
-          "text": "18. How confident are you in your ability to identify AI-generated images and videos?",
-          "options": [
-            "Very Low",
-            "Low",
-            "Moderate",
-            "High",
-            "Very High"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "section_e",
-      "title": "SECTION E: Detection Test",
-      "description": "Look at each image/video shown and select your answer and confidence level.",
+      "description": "Objective: To test practical accuracy and identify the cues used. Keep this short with just 8 media items to avoid survey fatigue.\nInstructions: Please look closely at the 8 media items below and answer the two questions for each.",
+      "id": "section_5",
       "isMediaSection": true,
       "mediaItems": [
         {
+          "anomalies": "Symmetry errors in the backpack straps, surreal light source reflecting on the helmet visor showing trees, physics-defying lavender stems.",
+          "description": "Photorealistic depiction of an astronaut picking purple lavender under a bright orange Martian sky.",
           "id": "m1",
-          "type": "image",
-          "title": "Image 1",
-          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
+          "title": "1",
           "trueType": "ai",
-          "description": "Image 1 Placeholder"
+          "type": "image",
+          "url": "https://cdn.mos.cms.futurecdn.net/43aVbKLKvmqfcfnR2YEvyA-1200-80.png.webp"
         },
         {
+          "anomalies": "No AI anomalies. Perfect reflections on wet floor, clear and legible price tags in Japanese kanji, anatomically correct hands holding ice scoop.",
+          "description": "Stunning street photography of a vendor smiling behind his seafood stall at Tsukiji Market, Tokyo.",
           "id": "m2",
-          "type": "image",
-          "title": "Image 2",
-          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
+          "title": "2",
           "trueType": "real",
-          "description": "Image 2 Placeholder"
+          "type": "image",
+          "url": "https://cdn.mos.cms.futurecdn.net/kPFybQBSrpiuFeqi9UaDZ4-1200-80.jpg.webp"
         },
         {
+          "anomalies": "Surreal biological fusion, blending textures between turtle shell and fertile soil, impossible lighting patterns deep underwater.",
+          "description": "A giant sea turtle swimming in deep blue ocean waters with an entire tropical forest growing on its shell.",
           "id": "m3",
-          "type": "image",
-          "title": "Image 3",
-          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800",
+          "title": "3",
           "trueType": "ai",
-          "description": "Image 3 Placeholder"
+          "type": "video",
+          "url": "https://youtu.be/cFzsUZyCReo"
         },
         {
+          "anomalies": "No AI anomalies. Flawless human anatomy, realistic physics-based liquid viscosity, consistent focus plane, authentic light refraction through honey.",
+          "description": "High-contrast close-up shot of liquid honey dripping between fingers, capturing natural skin pores and hair.",
           "id": "m4",
-          "type": "image",
-          "title": "Image 4",
-          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
+          "title": "4",
           "trueType": "real",
-          "description": "Image 4 Placeholder"
+          "type": "video",
+          "url": "https://youtube.com/shorts/nJFe0JIcPf4?feature=share"
         },
         {
+          "anomalies": "No anomalies. Clear depth of field and realistic shadows.",
+          "description": "A bustling city street with neon lights reflecting on a wet pavement.",
           "id": "m5",
+          "title": "5",
+          "trueType": "real",
           "type": "image",
-          "title": "Image 5",
-          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800",
-          "trueType": "ai",
-          "description": "Image 5 Placeholder"
+          "url": "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800"
         },
         {
-          "id": "v1",
-          "type": "video",
-          "title": "Video 1",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "anomalies": "Unnatural lighting and overly smooth textures. Text in the background is unreadable gibberish.",
+          "description": "Futuristic cyberpunk character standing in an alleyway.",
+          "id": "m6",
+          "title": "6",
           "trueType": "ai",
-          "description": "Video 1 Placeholder"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800"
         },
         {
-          "id": "v2",
-          "type": "video",
-          "title": "Video 2",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+          "anomalies": "Slight anatomical inconsistencies in background characters and unnatural depth separation.",
+          "description": "Aerial view of a fantastical castle built into the side of a massive waterfall.",
+          "id": "m7",
+          "title": "7",
+          "trueType": "ai",
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+          "anomalies": "No anomalies. Natural lighting and true-to-life textures.",
+          "description": "Close-up of a person's hands holding a warm cup of coffee.",
+          "id": "m8",
+          "title": "8",
           "trueType": "real",
-          "description": "Video 2 Placeholder"
-        },
-        {
-          "id": "v3",
-          "type": "video",
-          "title": "Video 3",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-          "trueType": "ai",
-          "description": "Video 3 Placeholder"
-        },
-        {
-          "id": "v4",
-          "type": "video",
-          "title": "Video 4",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-          "trueType": "real",
-          "description": "Video 4 Placeholder"
-        },
-        {
-          "id": "v5",
-          "type": "video",
-          "title": "Video 5",
-          "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-          "trueType": "ai",
-          "description": "Video 5 Placeholder"
+          "type": "image",
+          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800"
         }
-      ]
+      ],
+      "title": "SECTION 5: Practical Visual Test (Simulacra Detection)"
     }
-  ]
+  ],
+  "title": "Digital Media Literacy and AI Detection Survey"
 };
 
 let surveyConfig = null;
@@ -304,6 +250,7 @@ let chartSuccess = null;
 let chartPlatforms = null;
 let chartScatter = null;
 let chartBell = null;
+window.allQuestionCharts = [];
 
 // DOM Elements
 const adminThemeToggle = document.getElementById('admin-theme-toggle');
@@ -372,6 +319,8 @@ tabButtons.forEach(btn => {
       runStatisticalAnalysis();
     } else if (activeTab === 'tab-database') {
       renderResponsesTable();
+    } else if (activeTab === 'tab-visual-charts') {
+      if (typeof window.renderAllQuestionCharts === 'function') window.renderAllQuestionCharts();
     }
   });
 });
@@ -429,6 +378,20 @@ async function loadCMSData() {
     document.getElementById('builder-survey-description').value = surveyConfig.description;
     document.getElementById('builder-survey-consent').value = surveyConfig.consentText;
     
+    // Populate Clues
+    if (document.getElementById('builder-ai-image-clues')) {
+      document.getElementById('builder-ai-image-clues').value = (surveyConfig.aiImageClues || []).join('\n');
+    }
+    if (document.getElementById('builder-ai-video-clues')) {
+      document.getElementById('builder-ai-video-clues').value = (surveyConfig.aiVideoClues || []).join('\n');
+    }
+    if (document.getElementById('builder-authentic-image-clues')) {
+      document.getElementById('builder-authentic-image-clues').value = (surveyConfig.authenticImageClues || []).join('\n');
+    }
+    if (document.getElementById('builder-authentic-video-clues')) {
+      document.getElementById('builder-authentic-video-clues').value = (surveyConfig.authenticVideoClues || []).join('\n');
+    }
+    
     // 4. Render builders lists
     renderMediaItemsBuilder();
     renderQuestionsBuilder();
@@ -471,10 +434,10 @@ function updateExecutiveMetrics() {
   responsesList.forEach(resp => {
     const answers = resp.answers;
     
-    // Literacy Score Averages (Q11-Q18)
+    // Literacy Score Averages (Q10-Q12)
     let litSum = 0;
     let litCount = 0;
-    for (let i = 6; i <= 15; i++) {
+    for (let i = 10; i <= 12; i++) {
       if (answers[`q${i}`] !== undefined) {
         litSum += parseInt(answers[`q${i}`]);
         litCount++;
@@ -482,13 +445,13 @@ function updateExecutiveMetrics() {
     }
     if (litCount > 0) totalLiteracySum += (litSum / litCount);
     
-    // Tech Adoption Averages (Q19-Q24)
+    // Tech Adoption Averages (Q7-Q8)
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let i = 16; i <= 20; i++) {
+    for (let i = 7; i <= 8; i++) {
       if (answers[`q${i}`] !== undefined) {
         let val = parseInt(answers[`q${i}`]);
-                adoptSum += val;
+        adoptSum += val;
         adoptCount++;
       }
     }
@@ -498,7 +461,7 @@ function updateExecutiveMetrics() {
     mediaItems.forEach(item => {
       if (answers[item.id]) {
         totalDetectionsAttempted++;
-        if (answers[item.id] === item.trueType) {
+        if (answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) {
           totalDetectionsCorrect++;
         }
       }
@@ -554,7 +517,7 @@ function renderDashboardCharts() {
     responsesList.forEach(resp => {
       if (resp.answers[item.id]) {
         attempted++;
-        if (resp.answers[item.id] === item.trueType) correct++;
+        if (resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correct++;
       }
     });
     return attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
@@ -812,7 +775,7 @@ function renderQuestionsBuilder() {
     `;
     
     section.questions.forEach((q, qIdx) => {
-      const isSelectType = q.type === 'radio' || q.type === 'checkbox';
+      const isSelectType = q.type === 'radio' || q.type === 'checkbox' || q.type === 'dropdown';
       const optsVal = q.options ? q.options.join(', ') : '';
       
       html += `
@@ -828,7 +791,9 @@ function renderQuestionsBuilder() {
               <select class="builder-select q-type-select" style="width: 100%; height: 50px; background: rgba(11,15,25,0.7); border:1px solid var(--border-color); border-radius:var(--radius-md); color:var(--text-primary); padding:0 15px; outline:none;" onchange="toggleQuestionOptionsView(this)">
                 <option value="radio" ${q.type === 'radio' ? 'selected' : ''}>Multiple Choice (Single)</option>
                 <option value="checkbox" ${q.type === 'checkbox' ? 'selected' : ''}>Checkboxes (Multiple)</option>
-                <option value="likert5" ${q.type === 'likert5' ? 'selected' : ''}>Likert 5-Scale</option>
+                <option value="likert5" ${q.type === 'likert5' ? 'selected' : ''}>Likert 5-Scale (Agreement)</option>
+                <option value="likert5Freq" ${q.type === 'likert5Freq' ? 'selected' : ''}>Likert 5-Scale (Frequency)</option>
+                <option value="dropdown" ${q.type === 'dropdown' ? 'selected' : ''}>Dropdown Menu</option>
                 <option value="textarea" ${q.type === 'textarea' ? 'selected' : ''}>Long Text Area</option>
               </select>
             </div>
@@ -868,7 +833,7 @@ function renderQuestionsBuilder() {
 window.toggleQuestionOptionsView = function(selectEl) {
   const qCard = selectEl.closest('.builder-question-card');
   const optsWrapper = qCard.querySelector('.q-opts-wrapper');
-  if (selectEl.value === 'radio' || selectEl.value === 'checkbox') {
+  if (selectEl.value === 'radio' || selectEl.value === 'checkbox' || selectEl.value === 'dropdown') {
     optsWrapper.style.display = 'block';
   } else {
     optsWrapper.style.display = 'none';
@@ -883,6 +848,20 @@ function scrapeBuilderInputs() {
   surveyConfig.title = document.getElementById('builder-survey-title').value;
   surveyConfig.description = document.getElementById('builder-survey-description').value;
   surveyConfig.consentText = document.getElementById('builder-survey-consent').value;
+  
+  // Save Clues
+  if (document.getElementById('builder-ai-image-clues')) {
+      surveyConfig.aiImageClues = document.getElementById('builder-ai-image-clues').value.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (document.getElementById('builder-ai-video-clues')) {
+      surveyConfig.aiVideoClues = document.getElementById('builder-ai-video-clues').value.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (document.getElementById('builder-authentic-image-clues')) {
+      surveyConfig.authenticImageClues = document.getElementById('builder-authentic-image-clues').value.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+    if (document.getElementById('builder-authentic-video-clues')) {
+      surveyConfig.authenticVideoClues = document.getElementById('builder-authentic-video-clues').value.split('\n').map(s => s.trim()).filter(Boolean);
+    }
   
   const sectionCards = document.querySelectorAll('.builder-section-card');
   sectionCards.forEach(secCard => {
@@ -905,7 +884,7 @@ function scrapeBuilderInputs() {
       
       const qObj = { id: qId, type: type, text: text };
       
-      if (type === 'radio' || type === 'checkbox') {
+      if (type === 'radio' || type === 'checkbox' || type === 'dropdown') {
         const optsStr = qCard.querySelector('.q-opts-input').value;
         qObj.options = optsStr.split(',').map(s => s.trim()).filter(s => s.length > 0);
       }
@@ -1136,8 +1115,8 @@ function runStatisticalAnalysis() {
   runDescriptiveStatistics();
   
   // 2. COMPUTE CRONBACH'S ALPHA (Internal Consistency Reliability)
-  calculateCronbachAlpha('literacy', 11, 18);
-  calculateCronbachAlpha('adoption', 19, 24);
+  calculateCronbachAlpha('literacy', 10, 12);
+  calculateCronbachAlpha('adoption', 7, 8);
   
   // 2. BIVARIATE CROSSTABULATION & CHI-SQUARE
   updateCrosstabulation();
@@ -1168,7 +1147,7 @@ function calculateCronbachAlpha(scaleName, startQ, endQ) {
       if (isNaN(score)) score = 3; // neutral default
       
       // Reverse scale coding logic for Section D (DOI)
-      if (scaleName === 'adoption' && (q === 23 || q === 24)) {
+      if (scaleName === 'adoption' && (q === 0)) {
         score = 6 - score;
       }
       
@@ -1270,7 +1249,7 @@ function runDescriptiveStatistics() {
     // Media Accuracy
     let correctCount = 0;
     mediaItems.forEach(item => {
-      if (resp.answers[item.id] === item.trueType) correctCount++;
+      if (resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correctCount++;
     });
     const acc = mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0;
     accSum += acc;
@@ -1278,7 +1257,7 @@ function runDescriptiveStatistics() {
     
     // Literacy
     let lCount = 0, lRow = 0;
-    for (let q = 6; q <= 15; q++) {
+    for (let q = 10; q <= 12; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) { lRow += score; lCount++; }
     }
@@ -1288,7 +1267,7 @@ function runDescriptiveStatistics() {
     
     // Adoption
     let aCount = 0, aRow = 0;
-    for (let q = 16; q <= 20; q++) {
+    for (let q = 7; q <= 8; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) {
                 aRow += score; 
@@ -1436,7 +1415,7 @@ window.runAnovaAnalysis = function() {
   responsesList.forEach(resp => {
     let correctCount = 0;
     mediaItems.forEach(item => {
-      if (resp.answers[item.id] === item.trueType) correctCount++;
+      if (resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correctCount++;
     });
     const accuracy = mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0;
     
@@ -1666,19 +1645,19 @@ window.runMultipleRegressionAnalysis = function() {
   responsesList.forEach(resp => {
     let correctCount = 0;
     mediaItems.forEach(item => {
-      if (resp.answers[item.id] === item.trueType) correctCount++;
+      if (resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correctCount++;
     });
     Y.push(mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0);
     
     let litSum = 0, litCount = 0;
-    for (let q = 6; q <= 15; q++) {
+    for (let q = 10; q <= 12; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) { litSum += score; litCount++; }
     }
     X1.push(litCount > 0 ? litSum / litCount : 3.0);
     
     let adoptSum = 0, adoptCount = 0;
-    for (let q = 16; q <= 20; q++) {
+    for (let q = 7; q <= 8; q++) {
       let score = parseInt(resp.answers[`q${q}`]);
       if (!isNaN(score)) {
                 adoptSum += score; 
@@ -1897,10 +1876,28 @@ window.updateCrosstabulation = function() {
   if (n === 0) return;
   
   const selectedDemographic = document.getElementById('crosstab-select-var').value;
-  const configField = surveyConfig.sections[0].questions.find(q => q.id === selectedDemographic);
-  const options = configField ? configField.options : [];
+  const tbody = document.getElementById('crosstab-table-body');
   
-  // Set up categories of AI detection accuracy: Low (<50%), Moderate (50-75%), High (>75%)
+  const mediaSection = surveyConfig.sections.find(s => s.isMediaSection);
+  const mediaItems = mediaSection ? mediaSection.mediaItems : [];
+  
+  let options = [];
+  let configField = null;
+  
+  // Custom mapping for Primary Visual Clues
+  if (selectedDemographic === 'q14_clues') {
+    options = [
+      "Physical mistakes (e.g., weird fingers, extra limbs, bad teeth)",
+      "Background mistakes or unreadable/gibberish text",
+      "Unnatural perfect lighting, 'plastic-like' skin, or excessive gloss",
+      "It looked completely natural, flawless, and real to me.",
+      "I didn't see any specific clue; I just guessed."
+    ];
+  } else {
+    configField = surveyConfig.sections[0].questions.find(q => q.id === selectedDemographic);
+    options = configField ? configField.options : [];
+  }
+  
   const accuracyBuckets = ["Low (<50%)", "Moderate (50-75%)", "High (>75%)"];
   const matrix = {};
   
@@ -1908,35 +1905,46 @@ window.updateCrosstabulation = function() {
     matrix[opt] = { "Low (<50%)": 0, "Moderate (50-75%)": 0, "High (>75%)": 0, "total": 0 };
   });
   
-  const mediaSection = surveyConfig.sections.find(s => s.isMediaSection);
-  const mediaItems = mediaSection ? mediaSection.mediaItems : [];
-  
-  // Populating Matrix Data
-  responsesList.forEach(resp => {
-    const demVal = resp.answers[selectedDemographic];
-    if (!matrix[demVal]) return; // option match safety
-    
-    let correctCount = 0;
-    mediaItems.forEach(item => {
-      if (resp.answers[item.id] === item.trueType) correctCount++;
+  if (selectedDemographic === 'q14_clues') {
+    // Tally based on individual media items rather than total response score
+    responsesList.forEach(resp => {
+      mediaItems.forEach(item => {
+        const clue = resp.answers[`${item.id}_clue`];
+        if (clue && matrix[clue]) {
+          const isCorrect = resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated");
+          let bucket = isCorrect ? "High (>75%)" : "Low (<50%)"; // Binary representation mapping to existing buckets
+          
+          matrix[clue][bucket]++;
+          matrix[clue]["total"]++;
+        }
+      });
     });
-    
-    const pct = mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0;
-    
-    let bucket;
-    if (pct < 50) bucket = "Low (<50%)";
-    else if (pct <= 75) bucket = "Moderate (50-75%)";
-    else bucket = "High (>75%)";
-    
-    matrix[demVal][bucket]++;
-    matrix[demVal]["total"]++;
-  });
+  } else {
+    responsesList.forEach(resp => {
+      const demVal = resp.answers[selectedDemographic];
+      if (!matrix[demVal]) return;
+      
+      let correctCount = 0;
+      mediaItems.forEach(item => {
+        if (resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correctCount++;
+      });
+      
+      const pct = mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0;
+      
+      let bucket;
+      if (pct < 50) bucket = "Low (<50%)";
+      else if (pct <= 75) bucket = "Moderate (50-75%)";
+      else bucket = "High (>75%)";
+      
+      matrix[demVal][bucket]++;
+      matrix[demVal]["total"]++;
+    });
+  }
   
-  // Render Crosstabulation HTML Table
   let html = `
     <thead>
       <tr>
-        <th>${configField.text}</th>
+        <th>${selectedDemographic === 'q14_clues' ? 'Visual Clues Relied Upon' : configField.text}</th>
         ${accuracyBuckets.map(b => `<th>${b} Accuracy</th>`).join('')}
         <th>Total Row (r)</th>
       </tr>
@@ -1945,12 +1953,14 @@ window.updateCrosstabulation = function() {
   `;
   
   const colTotals = { "Low (<50%)": 0, "Moderate (50-75%)": 0, "High (>75%)": 0 };
+  let grandTotal = 0;
   
   options.forEach(opt => {
     const row = matrix[opt];
     colTotals["Low (<50%)"] += row["Low (<50%)"];
     colTotals["Moderate (50-75%)"] += row["Moderate (50-75%)"];
     colTotals["High (>75%)"] += row["High (>75%)"];
+    grandTotal += row["total"];
     
     html += `
       <tr>
@@ -1963,30 +1973,26 @@ window.updateCrosstabulation = function() {
     `;
   });
   
-  // Bottom Column Totals Row
   html += `
       <tr>
         <td style="font-weight:700;">Total Column (c)</td>
         <td>${colTotals["Low (<50%)"]}</td>
         <td>${colTotals["Moderate (50-75%)"]}</td>
         <td>${colTotals["High (>75%)"]}</td>
-        <td style="font-weight:700; background: rgba(99,102,241,0.1);">${n}</td>
+        <td style="font-weight:700; background: rgba(99,102,241,0.1);">${grandTotal}</td>
       </tr>
     </tbody>
   `;
   
-  document.getElementById('crosstab-table-body').innerHTML = html;
+  tbody.innerHTML = html;
   
-  // 3. CHI-SQUARE COMPUTATION
   let chiSquare = 0;
   
   options.forEach(opt => {
     const row = matrix[opt];
     accuracyBuckets.forEach(b => {
       const observed = row[b];
-      // Expected cell value = (Row Total * Column Total) / Grand Total N
-      const expected = (row["total"] * colTotals[b]) / n;
-      
+      const expected = (row["total"] * colTotals[b]) / grandTotal;
       if (expected > 0) {
         chiSquare += Math.pow(observed - expected, 2) / expected;
       }
@@ -2072,7 +2078,7 @@ function renderCorrelationScatter() {
     // 1. Score Literacy (q11 - q18)
     let litSum = 0;
     let litCount = 0;
-    for (let q = 6; q <= 15; q++) {
+    for (let q = 10; q <= 12; q++) {
       if (answers[`q${q}`] !== undefined) {
         litSum += parseInt(answers[`q${q}`]);
         litCount++;
@@ -2083,7 +2089,7 @@ function renderCorrelationScatter() {
     // 2. Score Detection accuracy (%)
     let correctCount = 0;
     mediaItems.forEach(item => {
-      if (answers[item.id] === item.trueType) correctCount++;
+      if (answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correctCount++;
     });
     const pct = mediaItems.length > 0 ? (correctCount / mediaItems.length) * 100 : 0;
     
@@ -2211,7 +2217,7 @@ function renderDoiBellCurve() {
     const answers = resp.answers;
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let q = 16; q <= 20; q++) {
+    for (let q = 7; q <= 8; q++) {
       if (answers[`q${q}`] !== undefined) {
         let val = parseInt(answers[`q${q}`]);
                 adoptSum += val;
@@ -2323,7 +2329,7 @@ function renderResponsesTable() {
     // Media Literacy Sum
     let litSum = 0;
     let litCount = 0;
-    for (let q = 6; q <= 15; q++) {
+    for (let q = 10; q <= 12; q++) {
       if (resp.answers[`q${q}`] !== undefined) {
         litSum += parseInt(resp.answers[`q${q}`]);
         litCount++;
@@ -2334,7 +2340,7 @@ function renderResponsesTable() {
     // Tech Adoption Sum
     let adoptSum = 0;
     let adoptCount = 0;
-    for (let q = 16; q <= 20; q++) {
+    for (let q = 7; q <= 8; q++) {
       if (resp.answers[`q${q}`] !== undefined) {
         let val = parseInt(resp.answers[`q${q}`]);
                 adoptSum += val;
@@ -2346,7 +2352,7 @@ function renderResponsesTable() {
     // Accuracy
     let correctCount = 0;
     mediaItems.forEach(item => {
-      if (resp.answers[item.id] === item.trueType) correctCount++;
+      if (resp.answers[item.id] === (item.trueType === "real" ? "Authentic" : "AI-Generated")) correctCount++;
     });
     const accPct = mediaItems.length > 0 ? Math.round((correctCount / mediaItems.length) * 100) : 0;
     
@@ -2358,9 +2364,7 @@ function renderResponsesTable() {
       <tr>
         <td style="color:var(--text-secondary);">${timeStr}</td>
         <td><strong>${participantName}</strong></td>
-        <td>${resp.answers.q1 || '18-21'}</td>
-        <td>${resp.answers.q2 || 'Other'}</td>
-        <td>${resp.answers.q3 || 'School'}</td>
+        <td>${resp.answers.q1 || ''}</td><td>${resp.answers.q2 || ''}</td><td>${resp.answers.q3 || ''}</td><td>${resp.answers.q4 || ''}</td><td>${resp.answers.q5 || ''}</td><td>${resp.answers.q6 || ''}</td>
         <td><span class="badge badge-accent">${litScore}/5</span></td>
         <td><span class="badge badge-secondary">${adoptScore}/5</span></td>
         <td><strong style="color: ${accPct >= 75 ? 'var(--success)' : (accPct >= 50 ? 'var(--warning)' : 'var(--danger)')};">${accPct}%</strong></td>
@@ -2444,7 +2448,7 @@ window.inspectRespondentSheet = function(respId) {
     if (section.isMediaSection) {
       section.mediaItems.forEach(item => {
         const choice = resp.answers[item.id];
-        const isCorrect = choice === item.trueType;
+        const isCorrect = choice === (item.trueType === "real" ? "Authentic" : "AI-Generated");
         const confidence = resp.answers[`${item.id}_confidence`];
         const helped = resp.answers[`${item.id}_helped`] || [];
         
@@ -2587,7 +2591,7 @@ btnExportCSV.addEventListener('click', () => {
     mediaItems.forEach(item => {
       const choice = answers[item.id] || '';
       const confidence = answers[`${item.id}_confidence`] || '';
-      const isCorrect = choice === item.trueType;
+      const isCorrect = choice === (item.trueType === "real" ? "Authentic" : "AI-Generated");
       
       row.push(choice);
       row.push(confidence);
@@ -2720,13 +2724,13 @@ btnGenerateMock.addEventListener('click', async () => {
         answers.q9 = profile === "tech-savvy-youth" ? "Yes" : fakes[Math.floor(Math.random() * fakes.length)];
         answers.q10 = Math.random() > 0.4 ? "Yes" : "No";
         
-        for (let q = 6; q <= 15; q++) {
+        for (let q = 10; q <= 12; q++) {
           let score = Math.round(literacyBias + (Math.random() * 2 - 1));
           score = Math.max(1, Math.min(5, score));
           answers[`q${q}`] = score;
         }
         
-        for (let q = 16; q <= 20; q++) {
+        for (let q = 7; q <= 8; q++) {
           let score;
           score = Math.round(techBias + (Math.random() * 2 - 1));
           score = Math.max(1, Math.min(5, score));
@@ -2881,3 +2885,262 @@ document.addEventListener('DOMContentLoaded', () => {
     showAdminToast('Diffusion of Innovations curve downloaded successfully!', 'success');
   });
 });
+
+
+// ==========================================
+// VISUAL QUESTION CHARTS TAB ENGINE
+// ==========================================
+window.renderAllQuestionCharts = function() {
+  const container = document.getElementById('all-questions-charts-container');
+  if (!container) return;
+  
+  if (responsesList.length === 0 || !surveyConfig) {
+    container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary); padding: 50px;">Awaiting dataset... Generate mock responses first.</div>';
+    return;
+  }
+  
+  // Clear previous canvases and charts
+  window.allQuestionCharts.forEach(c => c.destroy());
+  window.allQuestionCharts = [];
+  container.innerHTML = '';
+  
+  let html = '';
+  const questionData = [];
+  
+  // 1. Process Standard Sections
+  surveyConfig.sections.forEach(section => {
+    if (section.isMediaSection) return;
+    
+    section.questions.forEach(q => {
+      const frequencies = {};
+      let options = q.options || [];
+      if (!options.length && q.type.startsWith('likert5')) {
+          options = ["1", "2", "3", "4", "5"];
+      }
+      options.forEach(opt => frequencies[opt] = 0);
+      
+      responsesList.forEach(resp => {
+        let ans = resp.answers[q.id];
+        if (ans) {
+          if (frequencies[ans] !== undefined) frequencies[ans]++;
+          else frequencies[ans] = 1;
+        }
+      });
+      
+      questionData.push({
+          id: q.id,
+          title: q.text,
+          type: 'standard',
+          labels: Object.keys(frequencies),
+          data: Object.values(frequencies)
+      });
+    });
+  });
+  
+  // 2. Process Media Section
+  const mediaSection = surveyConfig.sections.find(s => s.isMediaSection);
+  if (mediaSection && mediaSection.mediaItems) {
+      mediaSection.mediaItems.forEach((item, idx) => {
+          const accFreq = { "Correctly Identified": 0, "Failed to Identify": 0 };
+          const clueFreq = {};
+          const possibleClues = window.getCluesList ? window.getCluesList(item.trueType === "real" ? "Authentic" : "AI-Generated") : (surveyConfig.aiClues || []).concat(surveyConfig.authenticClues || []);
+          possibleClues.forEach(c => clueFreq[c] = 0);
+          
+          responsesList.forEach(resp => {
+              let truthMapped = item.trueType === "real" ? "Authentic" : "AI-Generated";
+              if (resp.answers[item.id] === truthMapped) accFreq["Correctly Identified"]++;
+              else accFreq["Failed to Identify"]++;
+              
+              let clue = resp.answers[`${item.id}_clue`];
+              if (clue) {
+                 if (clueFreq[clue] !== undefined) clueFreq[clue]++;
+                 else clueFreq[clue] = 1;
+              }
+          });
+          
+          questionData.push({
+              id: `media_acc_${item.id}`,
+              title: `Item ${idx + 1}: ${item.title} (Accuracy)`,
+              type: 'media_acc',
+              labels: Object.keys(accFreq),
+              data: Object.values(accFreq)
+          });
+          
+          questionData.push({
+              id: `media_clue_${item.id}`,
+              title: `Item ${idx + 1}: ${item.title} (Clues Relied Upon)`,
+              type: 'media_clue',
+              labels: Object.keys(clueFreq),
+              data: Object.values(clueFreq)
+          });
+      });
+  }
+  
+  // Render HTML structure
+  questionData.forEach(qd => {
+      html += `
+        <div class="chart-card">
+          <div class="chart-card-header" style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="flex: 1; padding-right: 15px;">
+              <h3 class="chart-card-title" style="font-size: 1rem; line-height: 1.4;">${qd.title}</h3>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="downloadChart('${qd.id}', '${qd.title.replace(/'/g, "\'")}')" title="Download for Word/Docs" style="padding: 5px 10px; font-size: 0.75rem; flex-shrink: 0;">
+              <i class="fa-solid fa-download"></i> Save Image
+            </button>
+          </div>
+          <div class="chart-wrapper" style="height: 300px; padding-bottom: 20px; background: white; border-radius: 8px;">
+            <canvas id="chart-dyn-${qd.id}"></canvas>
+          </div>
+        </div>
+      `;
+  });
+  
+  container.innerHTML = html;
+  
+  // Inline plugin to draw numbers/percentages directly onto the charts
+  const chartValuesPlugin = {
+      id: 'chartValues',
+      afterDraw: (chart) => {
+          const ctx = chart.ctx;
+          chart.data.datasets.forEach((dataset, i) => {
+              const meta = chart.getDatasetMeta(i);
+              meta.data.forEach((element, index) => {
+                  const dataVal = dataset.data[index];
+                  const total = dataset.data.reduce((a, b) => a + b, 0);
+                  if (total === 0 || dataVal === 0) return;
+                  
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'middle';
+                  
+                  if (chart.config.type === 'pie') {
+                      const percentage = ((dataVal / total) * 100).toFixed(1) + '%';
+                      const text = `${dataVal} (${percentage})`; // Show Count (Percentage%)
+                      
+                      ctx.fillStyle = '#ffffff'; 
+                      ctx.font = 'bold 14px sans-serif';
+                      
+                      const position = element.tooltipPosition();
+                      
+                      ctx.shadowColor = "rgba(0,0,0,0.6)";
+                      ctx.shadowBlur = 4;
+                      ctx.fillText(text, position.x, position.y);
+                      ctx.shadowBlur = 0;
+                  } else if (chart.config.type === 'bar') {
+                      // Draw count directly above the bar
+                      const text = dataVal.toString();
+                      
+                      ctx.fillStyle = '#111827'; 
+                      ctx.font = 'bold 12px sans-serif';
+                      
+                      const x = element.x;
+                      const y = element.y - 10; // Slightly above the top of the bar
+                      
+                      ctx.fillText(text, x, y);
+                  }
+              });
+          });
+      }
+  };
+  
+  // Render Chart.js - Optimized for MS Word
+  const primaryColor = getComputedStyle(document.body).getPropertyValue('--primary').trim();
+  const secondaryColor = getComputedStyle(document.body).getPropertyValue('--secondary').trim();
+  const accentColor = getComputedStyle(document.body).getPropertyValue('--accent').trim();
+  
+  const colors = [primaryColor, secondaryColor, accentColor, '#ec4899', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+  const textColor = '#111827'; 
+  const gridColor = 'rgba(0,0,0,0.1)'; 
+  
+  questionData.forEach(qd => {
+      const ctx = document.getElementById(`chart-dyn-${qd.id}`);
+      if (!ctx) return;
+      
+      let chartType = 'bar';
+      let chartOptions = {
+          layout: {
+              padding: { top: 20 } // Ensure room above bars for text labels
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+              legend: { display: false }
+          },
+          scales: {
+              y: { 
+                 beginAtZero: true, 
+                 grid: { color: gridColor }, 
+                 ticks: { color: textColor, font: { size: 12, weight: '500' } } 
+              },
+              x: { 
+                 grid: { display: false }, 
+                 ticks: { color: textColor, font: { size: 11, weight: '600' }, maxRotation: 45, minRotation: 45 } 
+              }
+          }
+      };
+      
+      let backgroundColors = [primaryColor];
+      
+      if (qd.type === 'media_acc') {
+          chartType = 'pie';
+          backgroundColors = [
+              qd.data[0] > qd.data[1] ? primaryColor : secondaryColor, 
+              qd.data[1] > qd.data[0] ? '#ef4444' : '#f87171' 
+          ];
+          chartOptions = {
+              layout: { padding: 0 },
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                  legend: { position: 'right', labels: { color: textColor, font: { size: 13, weight: '600' } } }
+              }
+          };
+      } else {
+          backgroundColors = qd.labels.map((_, i) => colors[i % colors.length]);
+      }
+      
+      const newChart = new Chart(ctx, {
+          type: chartType,
+          data: {
+              labels: qd.labels.map(l => l.length > 25 ? l.substring(0, 25) + '...' : l), 
+              datasets: [{
+                  label: 'Responses',
+                  data: qd.data,
+                  backgroundColor: backgroundColors,
+                  borderWidth: 1,
+                  borderColor: '#ffffff',
+                  borderRadius: chartType === 'bar' ? 4 : 0
+              }]
+          },
+          options: chartOptions,
+          plugins: [chartValuesPlugin] // Apply the inline plugin to all charts
+      });
+      
+      window.allQuestionCharts.push(newChart);
+  });
+};
+
+// Global Download Function for dynamic charts
+window.downloadChart = function(id, title) {
+    const canvas = document.getElementById(`chart-dyn-${id}`);
+    if (!canvas) return;
+    
+    const offscreen = document.createElement('canvas');
+    offscreen.width = canvas.width;
+    offscreen.height = canvas.height;
+    const ctx = offscreen.getContext('2d');
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, offscreen.width, offscreen.height);
+    
+    ctx.drawImage(canvas, 0, 0);
+    
+    const link = document.createElement('a');
+    const safeTitle = title.replace(/[^a-z0-9]/gi, '_').toLowerCase().substring(0, 50);
+    link.download = `Figure_${safeTitle}.png`;
+    link.href = offscreen.toDataURL('image/png', 1.0);
+    link.click();
+    
+    if (typeof showAdminToast === 'function') {
+      showAdminToast('Chart downloaded successfully as PNG for MS Word!', 'success');
+    }
+};

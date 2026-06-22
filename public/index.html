@@ -146,6 +146,23 @@
         </button>
       </div>
     </section>
+
+    <!-- 5. Screen Out screen if participant does not meet demographics -->
+    <section id="screen-screenout" class="survey-screen" style="display: none;">
+      <div class="card text-center" style="padding: 60px 40px;">
+        <div class="success-icon"
+          style="background: rgba(239, 68, 68, 0.1); color: var(--danger); box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);">
+          <i class="fa-solid fa-hand-paper"></i>
+        </div>
+        <h1 class="card-title">Survey Terminated</h1>
+        <p class="card-description" style="max-width: 500px; margin: 0 auto 30px auto;">
+          Based on your responses, you do not meet the target demographic criteria for this specific research study. We thank you for your interest and time!
+        </p>
+        <button class="btn btn-secondary" onclick="window.location.reload();">
+          <i class="fa-solid fa-rotate-left"></i> Return to Welcome
+        </button>
+      </div>
+    </section>
   </main>
 
   <!-- Zoom/Magnify Modal for Media Item Inspection -->

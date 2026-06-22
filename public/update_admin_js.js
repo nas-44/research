@@ -1,34 +1,75 @@
 const fs = require('fs');
+const filePath = 'd:/Desktop/RESEARCH/survey/research/public/admin.js';
+let content = fs.readFileSync(filePath, 'utf8');
 
-let code = fs.readFileSync('d:/Desktop/RESEARCH/survey/research/public/admin.js', 'utf8');
+// Replace Literacy Score calculation loop
+content = content.replace(
+  /\/\/ Literacy Score Averages \(Q11-Q18\)[\s\S]*?\/\/ Tech Adoption Averages \(Q19-Q24\)/,
+  `// Literacy Score Averages (Q10-Q12)
+    let litSum = 0;
+    let litCount = 0;
+    for (let i = 10; i <= 12; i++) {
+      if (answers[\`q\${i}\`] !== undefined) {
+        litSum += parseInt(answers[\`q\${i}\`]);
+        litCount++;
+      }
+    }
+    if (litCount > 0) totalLiteracySum += (litSum / litCount);
+    
+    // Tech Adoption Averages (Q7-Q8)`
+);
 
-// Replace Q11-Q18 to Q6-Q15
-code = code.replace(/for \((let|var) ([a-zA-Z]+) = 11; \2 <= 18; \2\+\+\)/g, 'for ($1 $2 = 6; $2 <= 15; $2++)');
-code = code.replace(/const literacyQ = \[11,12,13,14,15,16,17,18\];/g, 'const literacyQ = [6,7,8,9,10,11,12,13,14,15];');
+// Replace Tech Adoption calculation loop
+content = content.replace(
+  /for \(let i = 16; i <= 20; i\+\+\) \{[\s\S]*?if \(adoptCount > 0\) totalAdoptionSum \+= \(adoptSum \/ adoptCount\);/,
+  `for (let i = 7; i <= 8; i++) {
+      if (answers[\`q\${i}\`] !== undefined) {
+        let val = parseInt(answers[\`q\${i}\`]);
+        adoptSum += val;
+        adoptCount++;
+      }
+    }
+    if (adoptCount > 0) totalAdoptionSum += (adoptSum / adoptCount);`
+);
 
-// Replace Q19-Q24 to Q16-Q20
-code = code.replace(/for \((let|var) ([a-zA-Z]+) = 19; \2 <= 24; \2\+\+\)/g, 'for ($1 $2 = 16; $2 <= 20; $2++)');
-code = code.replace(/const adoptionQ = \[19,20,21,22,23,24\];/g, 'const adoptionQ = [16,17,18,19,20];');
+// Also need to rewrite the Regression Logic which hardcodes predictor arrays
+// It currently uses x1 (lit) and x2 (adopt) correctly but the questions extracted might be old
+content = content.replace(
+  /function updateRegressionModel\(\) \{[\s\S]*?const predictors = \[\];/,
+  `function updateRegressionModel() {
+  const n = responsesList.length;
+  if (n < 5) return;
+  
+  let yData = []; // AI Detection Acc
+  let x1Data = []; // Literacy
+  let x2Data = []; // Tech Adoption
+  
+  const mediaSection = surveyConfig.sections.find(s => s.isMediaSection);
+  const mediaItems = mediaSection ? mediaSection.mediaItems : [];
+  
+  responsesList.forEach(resp => {
+    let litSum = 0; let litC = 0;
+    for (let i = 10; i <= 12; i++) { if(resp.answers[\`q\${i}\`]){ litSum += parseInt(resp.answers[\`q\${i}\`]); litC++; } }
+    let adoptSum = 0; let adoptC = 0;
+    for (let i = 7; i <= 8; i++) { if(resp.answers[\`q\${i}\`]){ adoptSum += parseInt(resp.answers[\`q\${i}\`]); adoptC++; } }
+    
+    let acc = 0; let attempt = 0;
+    mediaItems.forEach(item => {
+      if(resp.answers[item.id]) {
+        attempt++;
+        if(resp.answers[item.id] === item.trueType) acc++;
+      }
+    });
+    
+    if (litC > 0 && adoptC > 0 && attempt > 0) {
+      x1Data.push(litSum); // Use sum for regression
+      x2Data.push(adoptSum);
+      yData.push(acc); // Total correct
+    }
+  });
 
-// Remove single-line reverse-coded corrections
-code = code.replace(/if \([a-zA-Z]+ === 23 \|\| [a-zA-Z]+ === 24\) [a-zA-Z]+ = 6 - [a-zA-Z]+;.*?\n/g, '');
-code = code.replace(/if\([a-zA-Z]+ === 23 \|\| [a-zA-Z]+ === 24\) [a-zA-Z]+ = 6 - [a-zA-Z]+;.*?\n/g, '');
+  const predictors = [];`
+);
 
-// Clean up alpha calculation reverse coding
-code = code.replace(/if \(scaleName === 'adoption' && \([a-zA-Z]+ === 23 \|\| [a-zA-Z]+ === 24\)\) \{\n\s*val = 6 - val;\n\s*\}/g, '');
-
-// Clean up mock generator reverse coding
-code = code.replace(/if \(q === 23 \|\| q === 24\) \{\n\s*score = Math\.round\(\(6 - techBias\) \+ \(Math\.random\(\) \* 2 - 1\)\);\n\s*\} else \{\n\s*score = Math\.round\(techBias \+ \(Math\.random\(\) \* 2 - 1\)\);\n\s*\}/g, 'score = Math.round(techBias + (Math.random() * 2 - 1));');
-
-// Fix headers
-code = code.replace(/for \((let|var) ([a-zA-Z]+) = 6; \2 <= 15; \2\+\+\) headers\.push\(`C\$\{\2\}_Literacy`\);/g, 'for ($1 $2 = 6; $2 <= 15; $2++) headers.push(`B${$2}_Literacy`);');
-code = code.replace(/for \((let|var) ([a-zA-Z]+) = 16; \2 <= 20; \2\+\+\) headers\.push\(`D\$\{\2\}_TechAdopt`\);/g, 'for ($1 $2 = 16; $2 <= 20; $2++) headers.push(`C${$2}_Verification`);');
-
-// Fix ages array
-code = code.replace(/const ages = \["18–21", "22–25", "26–30", "31–40", "41\+"\];/g, 'const ages = ["18–24", "25–34", "35–44", "45–54", "55+"];');
-
-// Fix platform array
-code = code.replace(/const platforms = \["Instagram", "Facebook", "Twitter", "TikTok", "LinkedIn"\];/gi, 'const platforms = ["Instagram", "Facebook", "Both equally"];'); // Just in case it was old
-
-fs.writeFileSync('d:/Desktop/RESEARCH/survey/research/public/admin.js', code);
-console.log('admin.js updated successfully!');
+fs.writeFileSync(filePath, content);
+console.log('Updated admin.js scoring logic successfully.');
