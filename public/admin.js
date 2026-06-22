@@ -2375,7 +2375,7 @@ function renderResponsesTable() {
       <tr>
         <td style="color:var(--text-secondary);">${timeStr}</td>
         <td><strong>${participantName}</strong></td>
-        <td>${resp.answers.q1 || ''}</td><td>${resp.answers.q2 || ''}</td><td>${resp.answers.q3 || ''}</td><td>${resp.answers.q4 || ''}</td><td>${resp.answers.q5 || ''}</td><td>${resp.answers.q6 || ''}</td>
+        <td>${resp.answers.q1 || ''}</td><td>${resp.answers.q2 || ''}</td><td>${resp.answers.q4 || ''}</td>
         <td><span class="badge badge-accent">${litScore}/5</span></td>
         <td><span class="badge badge-secondary">${adoptScore}/5</span></td>
         <td><strong style="color: ${accPct >= 75 ? 'var(--success)' : (accPct >= 50 ? 'var(--warning)' : 'var(--danger)')};">${accPct}%</strong></td>
